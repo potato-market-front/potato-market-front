@@ -1,6 +1,7 @@
-import React from "react";
-import Router from "./shared/Router";
+import React from 'react';
+import Router from './shared/Router';
 
+// check
 function App() {
   return <Router />;
 }
