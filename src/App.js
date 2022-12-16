@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import styled from 'styled-components';
 
-function App() {
+export default function Main() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <div className='container'>
+      {/* header */}
+      <header className='header'>
+        <h1>메인페이지</h1>
       </header>
+      {/* images */}
+      <StImgWrapper>
+        <div className='image container'>
+          <StImg src='https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/projects/166893084493933827.jpg?w=2048&h=1280&c=c'></StImg>
+        </div>
+        <div className='image container'>
+          <StImg src='https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/projects/166893084493933827.jpg?w=2048&h=1280&c=c'></StImg>
+        </div>
+        <div className='image container'>
+          <StImg src='https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/projects/166893084493933827.jpg?w=2048&h=1280&c=c'></StImg>
+        </div>
+      </StImgWrapper>
     </div>
   );
 }
 
-export default App;
+const StImgWrapper = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0 20px;
+`;
+const StImg = styled.img`
+  width: 100%;
+`;
