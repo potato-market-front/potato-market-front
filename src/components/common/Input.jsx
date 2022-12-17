@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 
 const StyledInput = styled.div`
   width: ${(props) => props.width || "auto"};
@@ -70,11 +70,11 @@ function Input({ label, name, onChange, value, width }) {
   );
 }
 
-Input.propTypes = {
-  label: PropTypes.node.isRequired,
-  name: PropTypes.node.isRequired,
-  // onChange: PropTypes.node.isRequired,
-  // value: PropTypes.node.isRequired,
-};
+// Input.propTypes = {
+//   label: PropTypes.node.isRequired,
+//   name: PropTypes.node.isRequired,
+//   // onChange: PropTypes.node.isRequired,
+//   // value: PropTypes.node.isRequired,
+// };
 
 export default Input;
