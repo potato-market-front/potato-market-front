@@ -1,8 +1,8 @@
-import React from 'react';
-import Layout from '../components/common/Layout';
+import React from "react";
+import Layout from "../components/common/Layout";
 
-import Header from '../components/common/Header';
-import CreateProduct from '../components/features/create/CreateProduct';
+import Header from "../components/common/Header";
+import CreateProduct from "../components/features/create/createProduct";
 
 export default function Create() {
   return (
