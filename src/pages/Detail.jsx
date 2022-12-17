@@ -21,6 +21,4 @@ function Detail() {
   );
 }
 export default Detail;
-/* 
-className은 나중에 적용할 부분을 이해하기 편하도록 기입.
-*/
+
