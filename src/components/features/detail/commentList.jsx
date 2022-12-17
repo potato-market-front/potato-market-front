@@ -1,8 +1,8 @@
-import React from "react";
-import styled from "styled-components";
-import ReplyList from "../detail/replyList";
-import UpdateComment from "./updateComment";
-import CreateReply from "./createReply";
+import React from 'react';
+import styled from 'styled-components';
+import ReplyList from './ReplyList';
+import UpdateComment from './UpdateComment';
+import CreateReply from './CreateReply';
 
 const Div = styled.div`
   padding: 10px;
@@ -15,7 +15,7 @@ const InheritedDiv = styled(Div)`
 function CommentList() {
   return (
     <Div>
-      댓글 공간
+      댓글 공간 CommentList
       <InheritedDiv>
         쓰여진 댓글
         <UpdateComment />

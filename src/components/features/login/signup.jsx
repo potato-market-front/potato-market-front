@@ -1,43 +1,43 @@
-import React from "react";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
-import Input from "../../common/Input";
-import Button from "../../common/Button";
+import React from 'react';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import Input from '../../common/Input';
+import Button from '../../common/Button';
 
 function SignUp() {
   return (
     <StTopContainer>
-      <h1>감자마켓 회원가입</h1>
+      <h1>감자마켓 회원가입SignUp</h1>
       <StInputGroup>
         <div>
-          <Input type="text" name="id" label="ID를 입력하세요."></Input>
+          <Input type='text' name='id' label='ID를 입력하세요.'></Input>
         </div>
         <div>
-          <Input type="text" name="nick" label="NickName을 입력하세요."></Input>
+          <Input type='text' name='nick' label='NickName을 입력하세요.'></Input>
         </div>
         <div>
           <Input
-            type="password"
-            name="password"
-            label="비밀번호를 입력하세요."
+            type='password'
+            name='password'
+            label='비밀번호를 입력하세요.'
           ></Input>
         </div>
         <div>
           <Input
-            type="password"
-            name="confirm"
-            label="비밀번호를 확인해주세요."
+            type='password'
+            name='confirm'
+            label='비밀번호를 확인해주세요.'
           ></Input>
         </div>
       </StInputGroup>
       <StButtonGroup>
         <div>
-          <Button width={"250px"}>Sign Up</Button>
+          <Button width={'250px'}>Sign Up</Button>
         </div>
         <StLink>
-          <Link to="/login">
-            Already a member? Please{" "}
-            <span style={{ fontWeight: "bold" }}>Login.</span>
+          <Link to='/login'>
+            Already a member? Please{' '}
+            <span style={{ fontWeight: 'bold' }}>Login.</span>
           </Link>
         </StLink>
       </StButtonGroup>

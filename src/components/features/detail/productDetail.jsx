@@ -1,5 +1,5 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 const Div = styled.div`
   padding: 10px;
@@ -12,7 +12,7 @@ const InheritedDiv = styled(Div)`
 function ProductDetail() {
   return (
     <Div>
-      게시글 조회
+      게시글 조회 ProductDetail
       <InheritedDiv>사진이 보여지는 곳</InheritedDiv>
       <div>제목: 값</div>
       <div>작성자: 값</div>
