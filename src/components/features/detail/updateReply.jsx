@@ -1,6 +1,11 @@
-import React from 'react';
+import React, { useState } from "react";
 
 function UpdateReply() {
-  return <button>수정UpdateReply</button>;
+  const [display, setDisplay] = useState(false);
+  return (
+    <div>
+      <button>수정</button>
+    </div>
+  );
 }
 export default UpdateReply;
