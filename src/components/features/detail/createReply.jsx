@@ -30,6 +30,9 @@ function CreateReply() {
       <div>
         <button onClick={onPostHandler}>답글 달기</button>
       </div>
+      <div>
+        <button>수정</button>
+      </div>
     </div>
   );
 }

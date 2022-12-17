@@ -4,10 +4,6 @@ function UpdateReply() {
   const [display, setDisplay] = useState(false);
   const [replyInput, setReplyInput] = useState("");
 
-  return (
-    <div>
-      <button>수정</button>
-    </div>
-  );
+  return <div></div>;
 }
 export default UpdateReply;
