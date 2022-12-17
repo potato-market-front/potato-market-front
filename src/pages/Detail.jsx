@@ -14,10 +14,12 @@ const Div = styled.div`
 function Detail() {
   const { productId } = useParams();
   return (
-    <Layout>
+    <>
       <Header />
-      <UpdateProduct />
-    </Layout>
+      <Layout>
+        <UpdateProduct />
+      </Layout>
+    </>
   );
 }
 export default Detail;
