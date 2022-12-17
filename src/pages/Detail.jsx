@@ -1,69 +1,35 @@
 import React from "react";
 import styled from "styled-components";
+import CommentList from "../components/features/detail/commentList";
+import ProductDetail from "../components/features/detail/productDetail";
+import CreateComment from "../components/features/detail/createComment";
 
 const Div = styled.div`
-    padding: 10px;
-    color: #285430;
-    border: 2px solid red;
-    margin: 5px;
-`
-const InheritedDiv = styled(Div)`
-    border: 1px solid red;
-`
+  padding: 10px;
+  border: 1px solid red;
+  margin: 5px;
+`;
 
-const Detail = () => {
-    
+function Detail() {
   return (
-    <Div>
-    <InheritedDiv>
-      <h3>상세페이지</h3>
-      <div>
-        <button>게시글 수정</button>
-        <InheritedDiv>
-            사진이 보여지는 곳
-        </InheritedDiv>
-        <div>
-            제목
+    <Div className="container">
+      <div className="header">
+        header
+        <h3>상세페이지</h3>
+        <Div className="상품정보및수정">
+          Main에서 선택한 게시글
+          <button>(link to)게시글 수정</button>
+          <ProductDetail className="게시글정보" />
+        </Div>
+        <div className="댓글">
+          <CreateComment className="댓글쓰는공간" />
+          <CommentList className="댓글공간" />
         </div>
-        <div>
-            작성자
-        </div>
-        <div>
-            가격
-        </div>
-        <div>
-            글 내용
-        </div>
-        </div>
-        <InheritedDiv>댓글 쓰는 공간
-        <div>
-            <input placeholder="댓글 쓰기">
-            </input>
-            <button>
-                댓글 달기
-            </button>
-        </div>
-        </InheritedDiv>
-        <InheritedDiv>
-            댓글 보는 공간
-        <InheritedDiv>
-            쓰여진 댓글
-            <button>
-                수정
-            </button>
-            <button>
-                삭제
-            </button>
-            <button>
-                댓글 달기
-            </button> 
-            <InheritedDiv>
-                쓰여진 대댓글
-            </InheritedDiv>
-        </InheritedDiv>
-        </InheritedDiv>
-    </InheritedDiv>
+      </div>
     </Div>
   );
-};
+}
 export default Detail;
+/* 
+className은 나중에 적용할 부분을 이해하기 편하도록 기입.
+*/
