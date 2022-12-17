@@ -88,8 +88,14 @@ export default function ProductList() {
   return (
     <div className='container'>
       <StImgWrapper>
-        {cardList.map((v, i) => (
-          <Card key={v.id} imgSrc={v.image} title={v.title} price={v.price} />
+        {cardList.map((v) => (
+          <Card
+            key={v.id}
+            id={v.id}
+            imgSrc={v.image}
+            title={v.title}
+            price={v.price}
+          />
         ))}
       </StImgWrapper>
     </div>
