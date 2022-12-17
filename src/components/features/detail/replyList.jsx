@@ -1,6 +1,6 @@
-import React from "react";
-import styled from "styled-components";
-import UpdateReply from "./updateReply";
+import React from 'react';
+import styled from 'styled-components';
+import UpdateReply from './UpdateReply';
 
 const Div = styled.div`
   padding: 10px;
@@ -12,7 +12,7 @@ function ReplyList() {
   return (
     <Div>
       <div>
-        쓰여진 대댓글
+        쓰여진 대댓글 ReplyList
         <UpdateReply />
         <button>삭제</button>
       </div>

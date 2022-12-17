@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
 function UpdateReply() {
-  return <button>수정</button>;
+  return <button>수정UpdateReply</button>;
 }
 export default UpdateReply;

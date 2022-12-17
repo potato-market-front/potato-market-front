@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import CommentList from '../components/features/detail/commentList';
-import ProductDetail from '../components/features/detail/productDetail';
-import CreateComment from '../components/features/detail/createComment';
+import CommentList from '../components/features/detail/CommentList';
+import ProductDetail from '../components/features/detail/ProductDetail';
+import CreateComment from '../components/features/detail/CreateComment';
 import { useParams } from 'react-router-dom';
 
 const Div = styled.div`
