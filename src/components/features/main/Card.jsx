@@ -2,9 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-export default function Card({ imgSrc, title, price }) {
+export default function Card({ id, imgSrc, title, price }) {
   return (
-    <Link to='/create'>
+    <Link to={`/detail/${id}`}>
       <div className='image container'>
         <StImg src={imgSrc}></StImg>
         <StContentWrapper>
