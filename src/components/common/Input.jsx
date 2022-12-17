@@ -3,8 +3,8 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 
 const StyledInput = styled.div`
-  width: 100%;
-  margin: 0 auto;
+  width: ${(props) => props.width || "auto"};
+  margin: auto;
   position: relative;
   input {
     width: 100%;
@@ -33,7 +33,7 @@ const StyledInput = styled.div`
   }
 `;
 
-function Input({ label, name, onChange, value }) {
+function Input({ label, name, onChange, value, width }) {
   const [hasContent, setHasContent] = useState(false);
 
   const handleFloat = (event) => {
@@ -53,7 +53,7 @@ function Input({ label, name, onChange, value }) {
   }, [value]);
 
   return (
-    <StyledInput>
+    <StyledInput width={width}>
       <input
         name={name}
         type="text"

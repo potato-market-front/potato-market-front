@@ -11,13 +11,19 @@ function Login() {
       <h3>감사히 자-알 쓰겠습니다!</h3>
       <StInputGroup>
         <div>
-          <Input type="text" name="id" label="ID를 입력하세요."></Input>
+          <Input
+            type="text"
+            name="id"
+            label="ID를 입력하세요."
+            width={"250px"}
+          ></Input>
         </div>
         <div>
           <Input
             type="password"
             name="password"
             label="비밀번호를 입력하세요."
+            width={"250px"}
           ></Input>
         </div>
       </StInputGroup>
@@ -53,7 +59,6 @@ const StInputGroup = styled.div`
   margin: auto;
 
   gap: 30px;
-  width: 250px;
 `;
 
 const StButtonGroup = styled.div`

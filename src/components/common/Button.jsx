@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 
 const StyledBtn = styled.button`
   display: inline-block;
@@ -38,9 +38,9 @@ function Button({ width, color, children, onClick }) {
   );
 }
 
-Button.propTypes = {
-  color: PropTypes.node.isRequired,
-  children: PropTypes.node.isRequired,
-  // onClick: PropTypes.node.isRequired,
-};
+// Button.propTypes = {
+//   // color: PropTypes.node.isRequired,
+//   // children: PropTypes.node.isRequired,
+//   // onClick: PropTypes.node.isRequired,
+// };
 export default Button;
