@@ -18,7 +18,7 @@ export const postReply = createAsyncThunk(
   "reply/postRply",
   async (payload, thunkAPI) => {
     try {
-      const response = await axios.post(`http://localhost:3001/reply`, payload);
+      const response = await axios.post(`http://localhost:3003/reply`, payload);
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -30,7 +30,12 @@ export const replySlice = createSlice({
   name: "replyList",
   initialState,
   reducers: {},
-  extraReducers: {},
+  extraReducers: {
+    [postReply.fulfilled]: (state, action) => {
+      console.log("api 통신 확인", state.action);
+      state.replyList.push(action.payload);
+    },
+  },
 });
 
 export default replySlice.reducer;

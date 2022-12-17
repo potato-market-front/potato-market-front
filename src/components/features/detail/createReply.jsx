@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import Input from "../../common/Input";
+import { postReply } from "../../../redux/modules/replySlice";
 
 function CreateReply() {
   const [display, setDisplay] = useState(false);
