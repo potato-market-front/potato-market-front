@@ -5,6 +5,7 @@ import LoginPage from "../pages/Login";
 import Main from "../pages/Main";
 import Update from "../pages/Update";
 import SignUpPage from "../pages/Signup";
+import Detail from "../pages/Detail";
 
 function Router() {
   return (
@@ -15,6 +16,7 @@ function Router() {
         <Route path="/update/:productId" element={<Update />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/detail/:productId" element={<Detail />} />
       </Routes>
     </BrowserRouter>
   );
