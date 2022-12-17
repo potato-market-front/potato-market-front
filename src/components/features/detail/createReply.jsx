@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-<<<<<<< HEAD
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import Input from "../../common/Input";
 import { postReply } from "../../../redux/modules/replySlice";
 
 function CreateReply() {
+  const [reply, setRely] = useState("");
+
   const [display, setDisplay] = useState(false);
 
   const dispatch = useDispatch();
@@ -13,13 +13,6 @@ function CreateReply() {
   console.log(reply);
 
   const replyHandler = () => {};
-=======
-import styled from "styled-components";
-import Input from "../../common/Input";
-
-function CreateReply() {
-  const [reply, setRely] = useState("");
->>>>>>> 4b3865d (📝Add: Reply 페이지 ui 추가 및 common component 일부 수정)
 
   return (
     <StTopContainer>
