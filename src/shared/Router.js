@@ -14,6 +14,7 @@ function Router() {
         <Route path="/" element={<Main />} />
         <Route path="/create" element={<Create />} />
         <Route path="/update/:productId" element={<Update />} />
+        <Route path="/product" element={<Detail />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/detail" element={<Detail />} />

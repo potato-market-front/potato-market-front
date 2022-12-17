@@ -53,7 +53,6 @@ export const deleteReply = createAsyncThunk(
       const response = await axios.delete(
         `http://localhost:3003/replyList/${itemId}`
       );
-      // const response = await axios.get(`http://localhost:3003/replyList`);
       console.log("delete api확인", response);
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
@@ -63,6 +62,7 @@ export const deleteReply = createAsyncThunk(
   }
 );
 
+// extraReducer
 export const replySlice = createSlice({
   name: "replyList",
   initialState,

@@ -4,7 +4,6 @@ import UpdateProduct from "../components/features/update/UpdateProduct";
 import Layout from "../components/common/Layout";
 import Header from "../components/common/Header";
 import { useParams } from "react-router-dom";
-import ReplyList from "../components/features/detail/ReplyList";
 
 const Div = styled.div`
   padding: 10px;
