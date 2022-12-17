@@ -1,14 +1,27 @@
-import "./style.css";
+import React from "react";
+import styled from "styled-components";
+
+const Div = styled.div`
+    padding: 10px;
+    color: #285430;
+    border: 2px solid red;
+    margin: 5px;
+`
+const InheritedDiv = styled(Div)`
+    border: 1px solid red;
+`
 
 const Detail = () => {
+    
   return (
-    <div id="container">
+    <Div>
+    <InheritedDiv>
       <h3>상세페이지</h3>
       <div>
         <button>게시글 수정</button>
-        <div>
+        <InheritedDiv>
             사진이 보여지는 곳
-        </div>
+        </InheritedDiv>
         <div>
             제목
         </div>
@@ -22,7 +35,7 @@ const Detail = () => {
             글 내용
         </div>
         </div>
-        <div>댓글 쓰는 공간
+        <InheritedDiv>댓글 쓰는 공간
         <div>
             <input placeholder="댓글 쓰기">
             </input>
@@ -30,10 +43,10 @@ const Detail = () => {
                 댓글 달기
             </button>
         </div>
-        </div>
-        <div>
+        </InheritedDiv>
+        <InheritedDiv>
             댓글 보는 공간
-        <div>
+        <InheritedDiv>
             쓰여진 댓글
             <button>
                 수정
@@ -44,13 +57,13 @@ const Detail = () => {
             <button>
                 댓글 달기
             </button> 
-            <div>
+            <InheritedDiv>
                 쓰여진 대댓글
-            </div>
-        </div>
-        </div>
-      
-    </div>
+            </InheritedDiv>
+        </InheritedDiv>
+        </InheritedDiv>
+    </InheritedDiv>
+    </Div>
   );
 };
 export default Detail;
