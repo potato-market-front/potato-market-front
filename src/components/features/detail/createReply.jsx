@@ -1,9 +1,16 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import Input from "../../common/Input";
 
 function CreateReply() {
-  const [reply, setRely] = useState("");
+  const [display, setDisplay] = useState(false);
+
+  const dispatch = useDispatch();
+  const reply = useSelector((state) => state.replyList);
+  console.log(reply);
+
+  const replyHandler = () => {};
 
   return (
     <StTopContainer>

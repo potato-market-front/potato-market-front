@@ -3,6 +3,7 @@ import axios from "axios";
 
 const initialState = {
   replyList: [
+    //useSelector로 볼 수 있는 부분
     {
       id: 1,
       nickname: "닉네임2",
@@ -16,6 +17,20 @@ const initialState = {
 export const postReply = createAsyncThunk(
   "reply/postRply",
   async (payload, thunkAPI) => {
-    const response = await axios.post();
+    try {
+      const response = await axios.post(`http://localhost:3001/reply`, payload);
+      return thunkAPI.fulfillWithValue(response.data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
   }
 );
+
+export const replySlice = createSlice({
+  name: "replyList",
+  initialState,
+  reducers: {},
+  extraReducers: {},
+});
+
+export default replySlice.reducer;
