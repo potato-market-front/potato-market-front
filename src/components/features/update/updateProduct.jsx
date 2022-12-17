@@ -3,9 +3,9 @@ import styled from 'styled-components';
 // import { Link } from "react-router-dom";
 // import Button from "../../common/Button";
 // import Input from "../../common/Input";
-import CommentList from '../detail/commentList';
-import ProductDetail from '../detail/productDetail';
-import CreateComment from '../detail/createComment';
+import CommentList from '../detail/CommentList';
+import ProductDetail from '../detail/ProductDetail';
+import CreateComment from '../detail/CreateComment';
 
 export default function UpdateProduct() {
   return (

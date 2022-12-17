@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import UpdateProduct from '../components/features/update/updateProduct';
+import UpdateProduct from '../components/features/update/UpdateProduct';
 import Layout from '../components/common/Layout';
 import Header from '../components/common/Header';
 import { useParams } from 'react-router-dom';
