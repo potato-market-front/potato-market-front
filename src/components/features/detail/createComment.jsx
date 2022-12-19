@@ -1,21 +1,15 @@
-import React from 'react';
-import styled from 'styled-components';
-
-const Div = styled.div`
-  padding: 10px;
-  border: 1px solid red;
-  margin: 5px;
-`;
+import React from "react";
+import styled from "styled-components";
 
 function CreateComment() {
   return (
-    <Div>
+    <div>
       댓글 쓰는 공간 CreateComment
       <div>
-        <input placeholder='댓글 쓰기'></input>
+        <input placeholder="댓글 쓰기"></input>
         <button>댓글 달기(post)</button>
       </div>
-    </Div>
+    </div>
   );
 }
 export default CreateComment;

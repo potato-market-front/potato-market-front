@@ -6,6 +6,8 @@ import {
   getOneReply,
   updateReply,
 } from "../../../redux/modules/replySlice";
+import TextButton from "../../common/TextButton";
+import Input from "../../common/Input";
 
 function UpdateReply() {
   const dispatch = useDispatch();
@@ -17,12 +19,6 @@ function UpdateReply() {
   console.log("한개:", reply);
   console.log("한개의 id:", reply.id);
   console.log("한개의 content:", reply.content);
-
-  // 1개의 reply만 확인
-  //   const replyObject = replyList.find((item) => item.id === reply.id);
-  //   console.log("replyId", replyObject);
-  //   console.log("replyObject.id", replyObject.id);
-  //   console.log("replyObject.content", replyObject.content);
 
   // 1개의 id만 가져오기
   const id = reply.id;
@@ -67,52 +63,38 @@ function UpdateReply() {
     return <div>{error.message}</div>;
   }
 
-  // 위에 if문을 돌려서 리플라이 디스플레이가 false면 수정 버튼, true일 땐 저장 버튼
-  // true로 바뀌면 다른 버튼이 보이고, 수정 버튼은 edithandler가 필요없다. display만 변경
-  // if문의 리턴값으로 디브 >> 인풋필드로 변경한다.
-  // 저장 버튼에 에딧 핸들러를 넣어놓는다.
-  // 수정 버튼은 수정을 한다 안 한다의 상태값만 알려준다.
-
-  // 수정 버튼 클릭 시 인풋 필드로 변하는 로직도 저장
-  // update 방식 자체는 지금이랑 동일하게 해도 됨
-
-  // 댓글의 id를 받아와서 get을 실행시킨다.
-  // 대댓글은 언제나 댓글의 id가 필요하다.
-
-  // dispatch는 전역 상태로 관리한다.
-  // redux를 사용해도 props는 여전히 사용 가능
-
   if (replyDisplay === true) {
     // 깂이 true일 때 버튼 이름이 "저장"으로 변경
     return (
       <div>
-        <input
+        <Input
+          lebel="답글을 입력해주세요."
           value={content}
           onChange={(event) => {
             setContent(event.target.value);
           }}
-        ></input>
-        <button onClick={onEditHandler}>저장</button>
-        <button
+        ></Input>
+        <TextButton onClick={onEditHandler}>Save</TextButton>
+        <TextButton
           onClick={() => {
             setreplyDisplay(false);
           }}
         >
-          취소
-        </button>
+          Cancel
+        </TextButton>
       </div>
     );
     // 저장 버튼일 때 edithandler 실행
   } else {
     return (
-      <button
+      <TextButton
         onClick={() => {
           setreplyDisplay(true);
           // 지금 일단 false인데, 수정 버튼 누르면 setreplyDisplay를 통해 값을 true로 바꾸라는 뜻
         }}
       >
-        수정
-      </button>
+        Edit
+      </TextButton>
     );
   }
 }
@@ -136,3 +118,18 @@ export default UpdateReply;
 // find는 하나의 값만 찾고싶을 때 사용한다. (같은 조건이 여러개면 처음 만나는 애만 리턴을 한다.)
 // find는 많이 사용하진 않는다 = parameter를 잘 사용하면 이걸 통해서 주소값에 id를 넘길 수 있기 때문에
 // 내가 가진 데이터 중 하나만 찾을 때 find를 사용한다.
+
+// 위에 if문을 돌려서 리플라이 디스플레이가 false면 수정 버튼, true일 땐 저장 버튼
+// true로 바뀌면 다른 버튼이 보이고, 수정 버튼은 edithandler가 필요없다. display만 변경
+// if문의 리턴값으로 디브 >> 인풋필드로 변경한다.
+// 저장 버튼에 에딧 핸들러를 넣어놓는다.
+// 수정 버튼은 수정을 한다 안 한다의 상태값만 알려준다.
+
+// 수정 버튼 클릭 시 인풋 필드로 변하는 로직도 저장
+// update 방식 자체는 지금이랑 동일하게 해도 됨
+
+// 댓글의 id를 받아와서 get을 실행시킨다.
+// 대댓글은 언제나 댓글의 id가 필요하다.
+
+// dispatch는 전역 상태로 관리한다.
+// redux를 사용해도 props는 여전히 사용 가능

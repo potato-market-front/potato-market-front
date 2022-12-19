@@ -4,26 +4,18 @@ import ReplyList from "./ReplyList";
 import UpdateComment from "./UpdateComment";
 import CreateReply from "./CreateReply";
 
-const Div = styled.div`
-  padding: 10px;
-  border: 1px solid red;
-  margin: 5px;
-`;
-const InheritedDiv = styled(Div)`
-  border: 1px solid red;
-`;
 function CommentList() {
   return (
-    <Div>
+    <div>
       댓글 공간 CommentList
-      <InheritedDiv>
+      <div>
         쓰여진 댓글
         <UpdateComment />
         <button>삭제</button>
         <CreateReply />
         <ReplyList />
-      </InheritedDiv>
-    </Div>
+      </div>
+    </div>
   );
 }
 export default CommentList;

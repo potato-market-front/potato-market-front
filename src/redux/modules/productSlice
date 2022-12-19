@@ -1,0 +1,35 @@
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { authInstance } from "../../core/axios";
+
+const initialState = {
+  CARD_LIST: [
+    {
+      id: "1",
+      title: "Ugg",
+      image:
+        "https://dnvefa72aowie.cloudfront.net/origin/article/202212/F4C802A00FB1B732CD39B1DE901A8D0BD5929CD3D51B3756FE7243F5ABEE6791.jpg?q=82&s=300x300&t=crop",
+      price: 120000,
+      createdAt: "2022-11-30T17:45:43.726338",
+      modifiedAt: "2022-11-30T17:45:43.726338",
+    },
+  ],
+  error: null,
+};
+
+
+const getProductsList = useCallback(async () => {
+    const { data } = await axios.get("http://localhost:3001/products");
+    console.log(data);
+    setCardList(data);
+  }, []);
+
+
+
+
+  export const replySlice = createSlice({
+    name: "replyList",
+    initialState,
+    reducers: {},
+    extraReducers: {
+        []
+    }})

@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { useSelector } from "react-redux";
-// import { useParams, useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 import { deleteReply, getReply } from "../../../redux/modules/replySlice";
 import UpdateReply from "./UpdateReply";
-// import CommentList from "./CommentList";
-// import UpdateReply from "./UpdateReply";
+import TextButton from "../../common/TextButton";
+import SmallButton from "../../common/SmallButton";
 
 function ReplyList() {
   const dispatch = useDispatch();
@@ -42,33 +40,42 @@ function ReplyList() {
 
   return (
     <div>
-      <button
+      <SmallButton
         onClick={() => {
           setDisplay(!display);
         }}
       >
-        {display && "댓글 숨기기"}
+        {display && "Hide"}
         {!display &&
           (replyList.length === 0
-            ? "답글 보기"
-            : `${replyList.length}개의 답글 보기`)}
-      </button>
+            ? "Replies"
+            : `View ${replyList.length} more replies`)}
+      </SmallButton>
       <div>
         {display &&
           replyList.map((item) => (
             <div key={item.id}>
-              <div style={{ border: "1px solid black" }}>
+              <div
+                style={{
+                  border: "1px solid #DAE2B6",
+                  padding: "10px",
+                  margin: "5px auto",
+                }}
+              >
                 {/* <div style={{ fontSize: "0.7rem" }}>{item.nickname}</div> */}
+                <div style={{ fontSize: "11px" }}>{item.nickname}</div>
                 <div>{item.content}</div>
+                <div style={{ fontSize: "10px" }}>{item.createdAt}</div>
               </div>
               <div>
-                <button
+                <TextButton
+                  margin={"5px"}
                   onClick={() => {
                     onDeleteHandler(item.id);
                   }}
                 >
-                  삭제
-                </button>
+                  Delete
+                </TextButton>
                 <UpdateReply />
               </div>
             </div>
