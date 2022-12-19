@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-import comments from "../modules/commentsSlice";
+import comment from "../modules/commentSlice";
+import commentList from "../modules/commentsSlice";
 import { isDev } from "../modules";
 
 const store = configureStore({
   reducer: {
-    comments,
+    comment,
+    commentList,
   },
   devTools: isDev,
 });
