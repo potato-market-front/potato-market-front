@@ -12,7 +12,7 @@ function ReplyList() {
   const dispatch = useDispatch();
   const { error, replyList } = useSelector((state) => state.replyList);
   const [display, setDisplay] = useState(false);
-  console.log("replyList값", replyList);
+  console.log("replyList값:", replyList);
 
   // useEffect(() => {
   //   dispatch(getReply());

@@ -1,29 +1,58 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import { updateReply } from "../../../redux/modules/replySlice";
+// import { useParams } from "react-router-dom";
+import { getOneReply, updateReply } from "../../../redux/modules/replySlice";
 
 function UpdateReply() {
   const dispatch = useDispatch();
-  const params = useParams();
+  //   const param = useParams();
+
+  // 전역 state를 불러오는 구간
   const { error, replyList } = useSelector((state) => state.replyList);
-  const [replyInput, setReplyInput] = useState(replyList);
+  const reply = useSelector((state) => state.replyList.reply);
+  console.log("한개:", reply);
+  console.log("한개의 id:", reply.id);
+  console.log("한개의 content:", reply.content);
 
+  // 1개의 reply만 확인
+  //   const replyObject = replyList.find((item) => item.id === reply.id);
+  //   console.log("replyId", replyObject);
+  //   console.log("replyObject.id", replyObject.id);
+  //   console.log("replyObject.content", replyObject.content);
+
+  // 1개의 id만 가져오기
+  const id = reply.id;
+  //   const id = replyObject.id;
+
+  // 수정할 값을 불러오는 구간
+  const [content, setContent] = useState(reply.content);
+  console.log("수정할 값:", content);
+
+  // 수정 상태인지 확인하는 구간
   const [replyDisplay, setreplyDisplay] = useState(false);
-  console.log(replyDisplay, "false");
+  console.log("replyDisplay 상태:", replyDisplay);
 
+  // getOneReply 해서 1개의 값 가져오기
+  useEffect(() => {
+    dispatch(getOneReply(reply.id));
+    /*eslint-disable*/
+  }, [reply.content]); // 의존성 배열에 들어가는 값이 바뀔때마다 안에 있는걸 실행시킨다 >> getDiaryId(id)를 dispatch를 실행해 (렌더링이 새로 일어날때 useEffect 실행)
+
+  useEffect(() => {
+    setContent(reply.content);
+  }, [reply.content]);
+
+  //
   const onEditHandler = () => {
-    if (!replyDisplay) {
-    }
-    const editReply = { params, replyInput };
-    console.log("editReply", editReply);
-    if (replyInput === "") {
+    const editReply = { id, content };
+    console.log("editReply:", editReply);
+    if (content === "") {
       alert("답글 내용을 입력해주세요.");
     } else {
       dispatch(updateReply(editReply));
-      setReplyInput("");
     }
   };
+
   if (error) {
     return <div>{error.message}</div>;
   }
@@ -45,7 +74,18 @@ function UpdateReply() {
 
   if (replyDisplay === true) {
     // 깂이 true일 때 버튼 이름이 "저장"으로 변경
-    return <button onClick={onEditHandler}>저장</button>;
+    return (
+      <div>
+        <input
+          value={content}
+          onChange={(event) => {
+            setContent(event.target.value);
+          }}
+        ></input>
+        <button onClick={onEditHandler}>저장</button>
+        <button>취소</button>
+      </div>
+    );
     // 저장 버튼일 때 edithandler 실행
   } else {
     return (
