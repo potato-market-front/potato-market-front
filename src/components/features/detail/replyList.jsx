@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 // import { useParams, useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 import { deleteReply, getReply } from "../../../redux/modules/replySlice";
+import UpdateReply from "./UpdateReply";
 // import CommentList from "./CommentList";
 // import UpdateReply from "./UpdateReply";
 
@@ -13,9 +14,9 @@ function ReplyList() {
   const [display, setDisplay] = useState(false);
   console.log("replyList값", replyList);
 
-  useEffect(() => {
-    dispatch(getReply());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getReply());
+  // }, [dispatch]);
 
   useEffect(() => {
     dispatch(getReply());
@@ -28,7 +29,6 @@ function ReplyList() {
   const onDeleteHandler = (itemId) => {
     console.log(itemId);
     dispatch(deleteReply(itemId));
-    dispatch(getReply());
   };
 
   return (
@@ -60,6 +60,7 @@ function ReplyList() {
                 >
                   삭제
                 </button>
+                <UpdateReply />
               </div>
             </div>
           ))}
