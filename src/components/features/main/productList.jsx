@@ -75,15 +75,15 @@ import axios from "axios";
 export default function ProductList() {
   const [cardList, setCardList] = useState([]);
 
-  const getProductsList = useCallback(async () => {
-    const { data } = await axios.get("http://localhost:8080/products");
-    console.log(data);
-    setCardList(data);
-  }, []);
+  // // const getProductsList = useCallback(async () => {
+  // //   const { data } = await axios.get("http://localhost:3001/products");
+  // //   console.log(data);
+  // //   setCardList(data);
+  // // }, []);
 
-  useEffect(() => {
-    getProductsList();
-  }, [getProductsList]);
+  // useEffect(() => {
+  //   getProductsList();
+  // }, [getProductsList]);
 
   return (
     <div className="container">
