@@ -1,10 +1,10 @@
-import React, { useCallback } from 'react';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-import Card from './Card';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import axios from 'axios';
+import React, { useCallback } from "react";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import Card from "./Card";
+import { useState } from "react";
+import { useEffect } from "react";
+import axios from "axios";
 
 // const CARD_LIST = [
 //   {
@@ -76,7 +76,7 @@ export default function ProductList() {
   const [cardList, setCardList] = useState([]);
 
   const getProductsList = useCallback(async () => {
-    const { data } = await axios.get('http://localhost:8080/products');
+    const { data } = await axios.get("http://localhost:8080/products");
     console.log(data);
     setCardList(data);
   }, []);
@@ -86,7 +86,7 @@ export default function ProductList() {
   }, [getProductsList]);
 
   return (
-    <div className='container'>
+    <div className="container">
       <StImgWrapper>
         {cardList.map((v) => (
           <Card

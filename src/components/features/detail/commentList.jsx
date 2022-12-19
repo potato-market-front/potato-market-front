@@ -1,8 +1,8 @@
-import React from 'react';
-import styled from 'styled-components';
-import ReplyList from './ReplyList';
-import UpdateComment from './UpdateComment';
-import CreateReply from './CreateReply';
+import React from "react";
+import styled from "styled-components";
+import ReplyList from "./ReplyList";
+import UpdateComment from "./UpdateComment";
+import CreateReply from "./CreateReply";
 
 const Div = styled.div`
   padding: 10px;
