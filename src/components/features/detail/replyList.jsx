@@ -14,6 +14,10 @@ function ReplyList() {
   const [display, setDisplay] = useState(false);
   console.log("replyList값:", replyList);
 
+  // updateReply와 연결되는 부분
+  const reply = useSelector((state) => state.replyList.reply);
+  const [content, setContent] = useState(reply.content);
+
   // useEffect(() => {
   //   dispatch(getReply());
   // }, [dispatch]);
@@ -21,6 +25,11 @@ function ReplyList() {
   useEffect(() => {
     dispatch(getReply());
   }, [dispatch, replyList.length]);
+
+  useEffect(() => {
+    setContent(reply.content);
+    console.log("이펙트");
+  }, [reply]);
 
   if (error) {
     return <div>{error.message}</div>;

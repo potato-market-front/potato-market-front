@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // import { useParams } from "react-router-dom";
-import { getOneReply, updateReply } from "../../../redux/modules/replySlice";
+import {
+  getReply,
+  getOneReply,
+  updateReply,
+} from "../../../redux/modules/replySlice";
 
 function UpdateReply() {
   const dispatch = useDispatch();
@@ -35,11 +39,16 @@ function UpdateReply() {
   // getOneReply 해서 1개의 값 가져오기
   useEffect(() => {
     dispatch(getOneReply(reply.id));
+    // 렌더링 될 때 getOneReply가 한번 실행된다
+    console.log("getid 이펙트");
     /*eslint-disable*/
-  }, [reply.content]); // 의존성 배열에 들어가는 값이 바뀔때마다 안에 있는걸 실행시킨다 >> getDiaryId(id)를 dispatch를 실행해 (렌더링이 새로 일어날때 useEffect 실행)
+  }, [reply.content]);
 
   useEffect(() => {
     setContent(reply.content);
+    dispatch(getReply());
+    // 렌더링 될 때 setContent를 통해서 reply.content의 내용을 content에 반영한다.
+    console.log("이펙트");
   }, [reply.content]);
 
   //
@@ -50,6 +59,7 @@ function UpdateReply() {
       alert("답글 내용을 입력해주세요.");
     } else {
       dispatch(updateReply(editReply));
+      setreplyDisplay(false);
     }
   };
 
@@ -83,7 +93,13 @@ function UpdateReply() {
           }}
         ></input>
         <button onClick={onEditHandler}>저장</button>
-        <button>취소</button>
+        <button
+          onClick={() => {
+            setreplyDisplay(false);
+          }}
+        >
+          취소
+        </button>
       </div>
     );
     // 저장 버튼일 때 edithandler 실행
