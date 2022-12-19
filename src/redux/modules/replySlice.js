@@ -49,6 +49,7 @@ export const getOneReply = createAsyncThunk(
 export const postReply = createAsyncThunk(
   "reply/postreply",
   async (newReply, thunkAPI) => {
+    console.log(newReply);
     try {
       const response = await authInstance.post(`/replyList`, newReply);
       console.log("post api확인:", response);
