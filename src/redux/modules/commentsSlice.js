@@ -103,22 +103,6 @@ export const commentsSlice = createSlice({
       state.commentList.isLoading = false;
       state.commentList.error = action.payload;
     },
-
-    // 댓글 수정
-    // [updateComment.pending]: (state) => {
-    //   state.isLoading = true;
-    // },
-    // [updateComment.fulfilled]: (state, action) => {
-    //   const target = state.commentsByProductId.data.findIndex(
-    //     (comment) => comment.id === action.payload.id
-    //   );
-    //   state.isLoading = false;
-    //   state.commentsByProductId.data.splice(target, 1, action.payload);
-    // },
-    // [updateComment.rejected]: (state, action) => {
-    //   state.isLoading = false;
-    //   state.error = action.payload;
-    // },
     // 댓글 추가
     [postComment.pending]: (state) => {
       state.commentList.isLoading = true;
