@@ -10,7 +10,7 @@ const INIT_DATA = {
   content: '',
 };
 
-// type은 create | update | detail
+// type은 create | update 
 export default function ProductForm({ type = 'create', productData }) {
   const [formData, setFormData] = useState(
     productData ? productData : INIT_DATA
