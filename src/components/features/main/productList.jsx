@@ -104,7 +104,7 @@ export default function ProductList() {
 
 const StImgWrapper = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;                                      
   gap: 20px 20px;
   margin-top: 10px;
   margin: 0 auto;

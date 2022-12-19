@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import ProductForm from '../create/ProductForm';
+import DetailProductForm from '../create/DetailProductForm';
 
 const Div = styled.div`
   padding: 10px;
@@ -13,13 +13,7 @@ const InheritedDiv = styled(Div)`
 function ProductDetail() {
   return (
     <Div>
-      <ProductForm type='detail' />
-      {/* 게시글 조회 ProductDetail
-      <InheritedDiv>사진이 보여지는 곳</InheritedDiv>
-      <div>제목: 값</div>
-      <div>작성자: 값</div>
-      <div>가격: 값</div>
-      <div>글 내용: 값</div> */}
+      <DetailProductForm />
     </Div>
   );
 }
