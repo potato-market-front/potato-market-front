@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import { authInstance } from "../../core/axios";
 
 const initialState = {
   replyList: [
@@ -27,7 +27,7 @@ export const getReply = createAsyncThunk(
   "reply/getreply",
   async (payload, thunkAPI) => {
     try {
-      const response = await axios.get(`http://localhost:3003/replyList`);
+      const response = await authInstance.get(`/replyList`);
       console.log("get api확인:", response);
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
@@ -40,9 +40,7 @@ export const getReply = createAsyncThunk(
 export const getOneReply = createAsyncThunk(
   "reply/getonereply",
   async (replyid, thunkAPI) => {
-    const response = await axios.get(
-      `http://localhost:3003/replyList/${replyid}`
-    );
+    const response = await authInstance.get(`/replyList/${replyid}`);
     console.log("oneReply:", response);
     return thunkAPI.fulfillWithValue(response.data);
   }
@@ -52,10 +50,7 @@ export const postReply = createAsyncThunk(
   "reply/postreply",
   async (newReply, thunkAPI) => {
     try {
-      const response = await axios.post(
-        `http://localhost:3003/replyList`,
-        newReply
-      );
+      const response = await authInstance.post(`/replyList`, newReply);
       console.log("post api확인:", response);
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
@@ -70,8 +65,8 @@ export const updateReply = createAsyncThunk(
   async (editReply, thunkAPI) => {
     console.log("바뀌는 값:", editReply);
     try {
-      const response = await axios.put(
-        `http://localhost:3003/replyList/${editReply.id}`,
+      const response = await authInstance.put(
+        `/replyList/${editReply.id}`,
         editReply
       );
       console.log("update api:", response);
@@ -88,7 +83,7 @@ export const deleteReply = createAsyncThunk(
   async (itemId, thunkAPI) => {
     console.log("delete 시 id값:", itemId);
     try {
-      await axios.delete(`http://localhost:3003/replyList/${itemId}`);
+      await authInstance.delete(`/replyList/${itemId}`);
       return itemId;
       // 삭제는 json 서버에서 response를 받지 않는다 (삭제 시키기 때문에 json 서버에서 data가 존재하지 않는다 - json 서버의 특징)
     } catch (error) {
