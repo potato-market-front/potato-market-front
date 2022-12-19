@@ -1,9 +1,9 @@
-import React from 'react';
-import styled from 'styled-components';
-import UpdateProduct from '../components/features/update/UpdateProduct';
-import Layout from '../components/common/Layout';
-import Header from '../components/common/Header';
-import { useParams } from 'react-router-dom';
+import React from "react";
+import styled from "styled-components";
+import UpdateProduct from "../components/features/update/UpdateProduct";
+import Layout from "../components/common/Layout";
+import Header from "../components/common/Header";
+import { useParams } from "react-router-dom";
 
 const Div = styled.div`
   padding: 10px;
@@ -14,10 +14,12 @@ const Div = styled.div`
 function Detail() {
   const { productId } = useParams();
   return (
-    <Layout>
+    <>
       <Header />
-      <UpdateProduct />
-    </Layout>
+      <Layout>
+        <UpdateProduct />
+      </Layout>
+    </>
   );
 }
 export default Detail;
