@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { postReply } from "../../../redux/modules/replySlice";
 import TextButton from "../../common/TextButton";
@@ -21,24 +20,20 @@ function CreateReply() {
 
   return (
     <div>
-      <StInputGroup>
-        <Input
-          value={replyInput}
-          onChange={(event) => {
-            setReplyInput(event.target.value);
-          }}
-        />
-      </StInputGroup>
-      <div style={{ marginBottom: "10px" }}>
-        <TextButton onClick={onPostHandler}>Reply</TextButton>
+      <Input
+        value={replyInput}
+        onChange={(event) => {
+          setReplyInput(event.target.value);
+        }}
+      />
+      <div>
+        <div>
+          <TextButton onClick={onPostHandler}>Comment</TextButton>
+          <TextButton>Cancel</TextButton>
+        </div>
+        <div style={{ marginBottom: "10px" }}></div>
       </div>
     </div>
   );
 }
 export default CreateReply;
-
-const StInputGroup = styled.div`
-  margin-top: 20px;
-
-  gap: 30px;
-`;
