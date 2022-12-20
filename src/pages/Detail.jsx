@@ -3,9 +3,9 @@ import styled from "styled-components";
 import Layout from "../components/common/Layout";
 import Header from "../components/common/Header";
 import { useParams } from "react-router-dom";
-import CreateComment from "../components/features/detail/CreateComment";
-import CommentList from "../components/features/detail/CommentList";
 import ProductDetail from "../components/features/detail/ProductDetail";
+import ReplyList from "../components/features/detail/ReplyList";
+import CreateReply from "../components/features/detail/CreateReply";
 
 function Detail() {
   const { productId } = useParams();
@@ -14,8 +14,8 @@ function Detail() {
       <Layout>
         <Header />
         <ProductDetail />
-        <CreateComment />
-        <CommentList />
+        <CreateReply />
+        <ReplyList />
       </Layout>
     </div>
   );

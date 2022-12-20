@@ -1,12 +1,13 @@
 {
-  "replyList": [
+  "commentList": [
     {
-      "content": "1111",
+      "content": "111",
       "id": 1
     },
     {
-      "content": "2222",
+      "content": "222",
       "id": 2
     }
-  ]
+  ],
+  "replyList": []
 }

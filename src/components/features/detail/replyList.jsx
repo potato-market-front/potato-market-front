@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { deleteReply, getReply } from "../../../redux/modules/replySlice";
+import {
+  deleteReply,
+  getReply,
+  postReply,
+} from "../../../redux/modules/replySlice";
 import UpdateReply from "./UpdateReply";
 import TextButton from "../../common/TextButton";
 import SmallButton from "../../common/SmallButton";
+import Input from "../../common/Input";
 
 function ReplyList() {
   const dispatch = useDispatch();
@@ -15,10 +20,6 @@ function ReplyList() {
   // updateReply와 연결되는 부분
   const reply = useSelector((state) => state.replyList.reply);
   const [content, setContent] = useState(reply.content);
-
-  // useEffect(() => {
-  //   dispatch(getReply());
-  // }, [dispatch]);
 
   useEffect(() => {
     dispatch(getReply());
@@ -77,6 +78,7 @@ function ReplyList() {
                   Delete
                 </TextButton>
                 <UpdateReply />
+                {/* <Component key={item.id} content={content} /> */}
               </div>
             </div>
           ))}
@@ -86,3 +88,11 @@ function ReplyList() {
 }
 
 export default ReplyList;
+
+// Update랑 List랑 합쳐서 state를 하나 줘야한다 (boolean)
+
+const StInputGroup = styled.div`
+  margin-top: 20px;
+
+  gap: 30px;
+`;

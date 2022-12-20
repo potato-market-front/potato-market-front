@@ -6,19 +6,13 @@ const initialState = {
     {
       commentid: 1,
       id: 1,
-      nickname: "닉네임2",
       content: "대댓글 내용입니다.",
-      createdAt: "2022-11-30T17:45:43.726338",
-      modifiedAt: "2022-11-30T17:45:43.726338",
     },
   ],
   reply: {
     commentid: 1,
     id: 1,
-    nickname: "닉네임2",
     content: "대댓글 내용입니다.",
-    createdAt: "2022-11-30T17:45:43.726338",
-    modifiedAt: "2022-11-30T17:45:43.726338",
   },
   error: null,
 };
