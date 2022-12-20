@@ -48,7 +48,7 @@ export default function ProductDetail() {
 const StImg = styled.img`
   height: 100%;
   width: 100%;
-  object-fit: contain;
+  object-fit: cover;
 `;
 const StDetilProductContainer = styled.section`
   position: relative;

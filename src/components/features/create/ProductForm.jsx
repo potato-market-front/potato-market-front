@@ -86,6 +86,10 @@ export default function ProductForm({ type = 'create', productData }) {
     setImage(e.target.value);
   };
 
+  const onFileChangeHandler = (e) => {
+    let file = e.target
+  }
+
   return (
     <StCreateForm onSubmit={onSaveHandler}>
       <StImgContainer>
@@ -169,7 +173,8 @@ const StButtonWrap = styled.div`
  * 참고 :  https://nykim.work/86
  */
 const StImg = styled.img`
-  height: 100%;
-  width: 100%;
+  height: 300px;
+  width: 318px;
   object-fit: contain;
+  object-fit: cover;
 `;
