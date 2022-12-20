@@ -1,10 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "../../common/Button";
 import Input from "../../common/Input";
+import { authInstance } from "../../../core/axios";
+// import { postLogin } from "../../../redux/modules/login";
 
 function Login() {
+  const postLogin = async () => {
+    try {
+      const data = await authInstance.get("/api/auth/login");
+      return console.log(data);
+    } catch (error) {
+      return console.log(error);
+    }
+  };
+
+  const [id, setId] = useState("");
+  const [password, setPassword] = useState("");
+
+  const navigation = useNavigate();
+
+  const onLogin = () => {
+    postLogin({
+      id,
+      password,
+    })
+      .then((res) => {
+        localStorage.setItem("id", res.headers.authorization);
+        navigation("/");
+      })
+      .catch((error) => console.log(error));
+  };
+
   return (
     <StTopContainer>
       <h1>감자마켓</h1>
@@ -12,6 +40,9 @@ function Login() {
       <StInputGroup>
         <div>
           <Input
+            onChange={(event) => {
+              setId(event.target.value);
+            }}
             type="text"
             name="id"
             label="ID를 입력하세요."
@@ -20,6 +51,9 @@ function Login() {
         </div>
         <div>
           <Input
+            onChange={(event) => {
+              setPassword(event.target.value);
+            }}
             type="password"
             name="password"
             label="비밀번호를 입력하세요."
@@ -29,7 +63,9 @@ function Login() {
       </StInputGroup>
       <StButtonGroup>
         <div>
-          <Button width={"250px"}>Login</Button>
+          <Button width={"250px"} onClick={onLogin}>
+            Login
+          </Button>
         </div>
         <StLink>
           <Link to="/signup">
@@ -50,7 +86,6 @@ const StTopContainer = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 100px;
-
   gap: 50px;
 `;
 
@@ -58,7 +93,6 @@ const StInputGroup = styled.div`
   display: flex;
   flex-direction: column;
   margin: auto;
-
   gap: 30px;
 `;
 
@@ -67,7 +101,6 @@ const StButtonGroup = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
   margin: auto;
   gap: 20px;
 `;
