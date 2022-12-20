@@ -1,14 +1,10 @@
-
 import styled from 'styled-components';
 import { useState } from 'react';
 import { COLORS } from '../../styles/colors';
 import Logo from '../../assets/png/potato.png';
-import Button from './Button';
 import { Link } from 'react-router-dom';
-import SmallButton from './SmallButton';
 import { Pencil } from '../../assets/svg';
 import { useNavigate } from 'react-router-dom';
-
 
 export default function Header() {
   // TODO: redux에서 로그인 상태 관리하기

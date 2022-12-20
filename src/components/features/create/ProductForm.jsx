@@ -1,49 +1,112 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { COLORS, GRAY_COLORS } from '../../../styles/colors';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
+import axios from 'axios';
+import { useEffect } from 'react';
 
-const INIT_DATA = {
-  title: '',
-  price: '',
-  content: '',
-};
-
-// type은 create | update 
+// type은 create | update
 export default function ProductForm({ type = 'create', productData }) {
-  const [formData, setFormData] = useState(
-    productData ? productData : INIT_DATA
+  const [title, setTitle] = useState('');
+  const [price, setPrice] = useState('');
+  const [content, setContent] = useState('');
+  const [image, setImage] = useState(
+    // 'https://dnvefa72aowie.cloudfront.net/origin/article/202212/F4C802A00FB1B732CD39B1DE901A8D0BD5929CD3D51B3756FE7243F5ABEE6791.jpg?q=82&s=300x300&t=crop'
   );
+
   const navigate = useNavigate();
-  const onSaveHandler = () => {
-    navigate('/');
+
+  const { productId } = useParams();
+
+  const getProductsList = useCallback(async () => {
+    const { data } = await axios.get(
+      `http://localhost:3001/products/${productId}`
+    );
+    setTitle(data.title);
+    setPrice(data.price);
+    setContent(data.content);
+    setImage(data.image);
+  }, [productId]);
+
+  useEffect(() => {
+    if (type === 'update') {
+      getProductsList();
+    }
+  }, [getProductsList, type]);
+
+  const updateProduct = async () => {
+    await axios.put(`http://localhost:3001/products/${productId}`, {
+      id: productId,
+      title: title,
+      price: price,
+      nickname: 'ssori',
+      content: content,
+      image: image,
+    });
   };
 
-  const onChangeHandler = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const createProduct = async () => {
+    await axios.post(`http://localhost:3001/products`, {
+      id: productId,
+      title: title,
+      price: price,
+      nickname: 'ssori',
+      content: content,
+      image: image,
+    });
+  };
+  
+  const onSaveHandler = async (e) => {
+    e.preventDefault();
+    if (type === 'create') {
+      await createProduct();
+      alert('작성 완료!');
+      navigate('/');
+    }
+
+    if (type === 'update') {
+      await updateProduct();
+      alert('수정 완료!');
+      navigate('/');
+    }
   };
 
-  console.log(formData);
+  const onChangeTitle = (e) => {
+    setTitle(e.target.value);
+  };
+  const onChangePrice = (e) => {
+    setPrice(e.target.value);
+  };
+  const onChangeContent = (e) => {
+    setContent(e.target.value);
+  };
+  //아직 구현 안됨
+  const onChangeImage = (e) => {
+    setImage(e.target.value);
+  };
+
   return (
-    <StCreateContainer>
-      <StImgContainer>사진을 업로드 해주세요.</StImgContainer>
+    <StCreateForm onSubmit={onSaveHandler}>
+      <StImgContainer>
+        {image ? <StImg src={image} /> : '사진을 업로드 해주세요.'}
+      </StImgContainer>
       <StInput
-        value={formData.title}
+        value={title}
         name='title'
-        onChange={onChangeHandler}
+        onChange={onChangeTitle}
         placeholder='제목'
       />
       <StInput
-        value={formData.price}
+        value={price}
         name='price'
-        onChange={onChangeHandler}
+        onChange={onChangePrice}
         placeholder='가격'
       />
       <StTextarea
-        value={formData.content}
+        value={content}
         name='content'
-        onChange={onChangeHandler}
+        onChange={onChangeContent}
         rows={10}
         placeholder='글내용'
       />
@@ -52,11 +115,11 @@ export default function ProductForm({ type = 'create', productData }) {
           <StButton onClick={onSaveHandler}>저장하기</StButton>
         </StButtonWrap>
       )}
-    </StCreateContainer>
+    </StCreateForm>
   );
 }
 
-const StCreateContainer = styled.section`
+const StCreateForm = styled.form`
   width: 320px;
   margin: 0 auto;
 `;
@@ -68,6 +131,7 @@ const StImgContainer = styled.div`
   color: ${COLORS.POINT};
   border-radius: 8px;
   margin-bottom: 16px;
+  overflow: hidden;
 `;
 
 const StInput = styled.input`
@@ -92,9 +156,20 @@ const StButton = styled.button`
   color: ${GRAY_COLORS.WHITE};
   margin: 0 auto;
   padding: 4px 8px;
+  cursor: pointer;
 `;
 
 const StButtonWrap = styled.div`
   text-align: center;
   padding: 4px 8px;
+`;
+
+/*
+ * 이미지 리사이징 : 부모테그에 맞게 이미지 변경
+ * 참고 :  https://nykim.work/86
+ */
+const StImg = styled.img`
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
 `;
