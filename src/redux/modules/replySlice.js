@@ -4,24 +4,23 @@ import { authInstance } from "../../core/axios";
 const initialState = {
   replyList: [
     {
-      commentid: 1,
       id: 1,
       content: "대댓글 내용입니다.",
     },
   ],
-  reply: {
-    commentid: 1,
-    id: 1,
-    content: "대댓글 내용입니다.",
-  },
+  // reply: {
+  //   id: 1,
+  //   content: "대댓글 내용입니다.",
+  // },
   error: null,
 };
 
 export const getReply = createAsyncThunk(
   "reply/getreply",
   async (payload, thunkAPI) => {
+    console.log("넘어온 값", payload);
     try {
-      const response = await authInstance.get(`/replyList`);
+      const response = await authInstance.get(`/replyList/${payload.detailId}`);
       console.log("get api확인:", response);
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
@@ -31,14 +30,14 @@ export const getReply = createAsyncThunk(
   }
 );
 
-export const getOneReply = createAsyncThunk(
-  "reply/getonereply",
-  async (replyid, thunkAPI) => {
-    const response = await authInstance.get(`/replyList/${replyid}`);
-    console.log("oneReply:", response);
-    return thunkAPI.fulfillWithValue(response.data);
-  }
-);
+// export const getOneReply = createAsyncThunk(
+//   "reply/getonereply",
+//   async (replyid, thunkAPI) => {
+//     const response = await authInstance.get(`/replyList/${replyid}`);
+//     console.log("oneReply:", response);
+//     return thunkAPI.fulfillWithValue(response.data);
+//   }
+// );
 
 export const postReply = createAsyncThunk(
   "reply/postreply",
@@ -101,10 +100,10 @@ export const replySlice = createSlice({
     [getReply.rejected]: (state, action) => {
       state.error = action.payload;
     },
-    [getOneReply.fulfilled]: (state, action) => {
-      console.log("oneReply action.payload:", action.payload);
-      state.reply = action.payload;
-    },
+    // [getOneReply.fulfilled]: (state, action) => {
+    //   console.log("oneReply action.payload:", action.payload);
+    //   state.reply = action.payload;
+    // },
     [postReply.fulfilled]: (state, action) => {
       state.replyList.push(action.payload);
       console.log("post action.payload:", action.payload);

@@ -24,12 +24,15 @@ function SignUp() {
       password,
     }).then((res) => {
       localStorage.setItem("id", res.headers.authorization);
+      // 어떤 변수명에 토큰 받을지 서로 얘기해야함 (res.headers...)
+      //
       navigation("/login");
     });
   };
 
   const idDup = (id) => {
     idDupCheck(id).then((res) => {
+      // res로 받아왔다 idDupCheck로부터
       console.log("ID 중복:", res);
       if (res === false) {
         alert("사용 가능한 ID입니다.");

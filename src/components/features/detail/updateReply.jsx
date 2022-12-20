@@ -15,6 +15,7 @@ function UpdateReply() {
 
   // 전역 state를 불러오는 구간
   const { error, replyList } = useSelector((state) => state.replyList);
+  console.log(replyList);
   const reply = useSelector((state) => state.replyList.reply);
   console.log("한개:", reply);
   console.log("한개의 id:", reply.id);
@@ -22,6 +23,7 @@ function UpdateReply() {
 
   // 1개의 id만 가져오기
   const id = reply.id;
+  console.log("1개 id:", id);
   //   const id = replyObject.id;
 
   // 수정할 값을 불러오는 구간

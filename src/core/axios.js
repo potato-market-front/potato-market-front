@@ -1,10 +1,10 @@
 import axios from "axios";
 
 export const authInstance = axios.create({
-  baseURL: "http://3.35.218.111",
-  headers: {
-    "Access-Control-Allow-Origin": "*",
-  },
+  baseURL: "http://localhost:3001",
+  // headers: {
+  //   // "Access-Control-Allow-Origin": "*",
+  // },
 });
 
 // token이 넘어오면 그걸 받아서 토큰을 받으면 프론트에서 관리를 한다 - 어딘가에 저장한다.
@@ -16,3 +16,5 @@ export const authInstance = axios.create({
 // 그냥 공통적으로 다 토큰을 보낸다 request header에 담아서 보낸다.
 
 // 리퀘스터 사용법이랑 토큰 헤더에 담아서 보내는법 검색해보기
+
+// 헤더엔 저장된 토큰값을 헤더에 실어서 보낸다.

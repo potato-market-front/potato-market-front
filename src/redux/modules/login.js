@@ -22,6 +22,7 @@ export const idDupCheck = async (id) => {
   try {
     const data = await authInstance.post("/api/auth/idDupleCheck", id);
     return data;
+    // 조회되고 처리된 값이 data에 담겨오고,
   } catch (error) {
     return console.log(error);
   }

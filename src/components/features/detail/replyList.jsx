@@ -4,52 +4,73 @@ import styled from "styled-components";
 import {
   deleteReply,
   getReply,
-  getOneReply,
   updateReply,
 } from "../../../redux/modules/replySlice";
 import TextButton from "../../common/TextButton";
 import SmallButton from "../../common/SmallButton";
 import Input from "../../common/Input";
+import { useParams } from "react-router-dom";
 
 function ReplyList() {
+  const { productId } = useParams();
+  console.log(productId);
   const dispatch = useDispatch();
+
+  // 전체 상태
+  const select = useSelector((state) => state);
+  console.log("전체 state:", select);
+
+  // // product 상태
+  // const productList = select.products.products;
+  // console.log("productList:", productList);
+
+  // const productDetail = productList.find((item) => item.id === productId);
+  // console.log("productDetail:", productDetail);
+
+  // 댓글의 상태
   const { error, replyList } = useSelector((state) => state.replyList);
-  const [display, setDisplay] = useState(false);
   console.log("replyList값:", replyList);
 
+  // 수정 상태 지정
+  const [display, setDisplay] = useState(false);
+
   // updateReply와 연결되는 부분
-  const reply = useSelector((state) => state.replyList.reply);
-  const [content, setContent] = useState(reply.content);
+  // 댓글 배열
+  const replies = select.replyList.replyList;
+  console.log("댓글의 배열:", replies);
+  const reply = replies.find((item) => item.id === productId);
+  console.log("댓글 1개:", reply);
+
+  // update할 때 복구
+  const [replyContent, setReplyContent] = useState(reply.content);
   console.log("한개:", reply);
   console.log("한개의 id:", reply.id);
-  console.log("한개의 content:", reply.content);
+  console.log("한개의 content:", reply.replyContent);
 
   // 1개의 id만 가져오기
   const id = reply.id;
 
-  // 수정할 값을 불러오는 구간
-  console.log("수정할 값:", content);
+  // // 수정할 값을 불러오는 구간
+  console.log("수정할 값:", replyContent);
 
   // 수정 상태인지 확인하는 구간
   const [replyDisplay, setreplyDisplay] = useState(false);
   console.log("replyDisplay 상태:", replyDisplay);
 
-  const edit = true;
-
   useEffect(() => {
-    dispatch(getReply());
-  }, [dispatch, replyList.length]);
+    dispatch(getReply({ detailId: productId }));
+  }, [dispatch, productId]);
 
-  // getOneReply 해서 1개의 값 가져오기
-  useEffect(() => {
-    dispatch(getOneReply(reply.id));
-    // 렌더링 될 때 getOneReply가 한번 실행된다
-    console.log("getid 이펙트");
-    /*eslint-disable*/
-  }, [reply.content]);
+  // getOneReply 해서 1개의 값 가져오기 (아마도 필요없을듯)
+  // useEffect(() => {
+  //   dispatch(getOneReply(reply.id));
+  //   // 렌더링 될 때 getOneReply가 한번 실행된다
+  //   console.log("getid 이펙트");
+  // }, [reply.content]);
 
+  // update 할 떄 복구
   useEffect(() => {
-    setContent(reply.content);
+    setReplyContent(reply.replyContent);
     console.log("이펙트");
   }, [reply]);
 
@@ -62,10 +83,11 @@ function ReplyList() {
     dispatch(deleteReply(itemId));
   };
 
+  // update할 때 복구
   const onEditHandler = () => {
-    const editReply = { id, content };
+    const editReply = { id, replyContent };
     console.log("editReply:", editReply);
-    if (content === "") {
+    if (replyContent === "") {
       alert("답글 내용을 입력해주세요.");
     } else {
       dispatch(updateReply(editReply));
@@ -79,9 +101,9 @@ function ReplyList() {
       <div>
         <Input
           lebel="답글을 입력해주세요."
-          value={content}
+          value={replyContent}
           onChange={(event) => {
-            setContent(event.target.value);
+            setReplyContent(event.target.value);
           }}
         ></Input>
         <TextButton onClick={onEditHandler}>Save</TextButton>

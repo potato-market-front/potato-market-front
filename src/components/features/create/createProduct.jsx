@@ -1,19 +1,19 @@
-import React from 'react';
-import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
-import { COLORS, GRAY_COLORS } from '../../../styles/colors';
+import React from "react";
+import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+import { COLORS, GRAY_COLORS } from "../../../styles/colors";
 
 export default function CreateProduct() {
   const navigate = useNavigate();
   const onSaveHandler = () => {
-    navigate('/');
+    navigate("/");
   };
   return (
     <StCreateContainer>
       <StImgContainer>사진을 업로드 해주세요.</StImgContainer>
-      <StInput placeholder='제목' />
-      <StInput placeholder='가격' />
-      <StTextarea rows={10} placeholder='글내용' />
+      <StInput placeholder="제목" />
+      <StInput placeholder="가격" />
+      <StTextarea rows={10} placeholder="글내용" />
       <StButtonWrap>
         <StButton onClick={onSaveHandler}>저장하기</StButton>
       </StButtonWrap>
