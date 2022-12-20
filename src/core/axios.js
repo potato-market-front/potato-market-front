@@ -1,7 +1,10 @@
 import axios from "axios";
 
 export const authInstance = axios.create({
-  baseURL: "http://localhost:3001",
+  baseURL: "http://3.35.218.111",
+  headers: {
+    "Access-Control-Allow-Origin": "*",
+  },
 });
 
 // token이 넘어오면 그걸 받아서 토큰을 받으면 프론트에서 관리를 한다 - 어딘가에 저장한다.

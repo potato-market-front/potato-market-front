@@ -3,7 +3,6 @@ import styled from "styled-components";
 import Layout from "../components/common/Layout";
 import Header from "../components/common/Header";
 import { useParams } from "react-router-dom";
-import ProductDetail from "../components/features/detail/ProductDetail";
 import ReplyList from "../components/features/detail/ReplyList";
 import CreateReply from "../components/features/detail/CreateReply";
 
@@ -13,7 +12,6 @@ function Detail() {
     <div style={{ padding: "20px" }}>
       <Layout>
         <Header />
-        <ProductDetail />
         <CreateReply />
         <ReplyList />
       </Layout>

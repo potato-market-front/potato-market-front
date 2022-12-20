@@ -1,14 +1,10 @@
-
-import styled from 'styled-components';
-import { useState } from 'react';
-import { COLORS } from '../../styles/colors';
-import Logo from '../../assets/png/potato.png';
-import Button from './Button';
-import { Link } from 'react-router-dom';
-import SmallButton from './SmallButton';
-import { Pencil } from '../../assets/svg';
-import { useNavigate } from 'react-router-dom';
-
+import styled from "styled-components";
+import { useState } from "react";
+import { COLORS } from "../../styles/colors";
+import Logo from "../../assets/png/potato.png";
+import { Link } from "react-router-dom";
+import { Pencil } from "../../assets/svg";
+import { useNavigate } from "react-router-dom";
 
 export default function Header() {
   // TODO: redux에서 로그인 상태 관리하기
@@ -16,21 +12,21 @@ export default function Header() {
   const navigate = useNavigate();
 
   const onClickCreateHandler = () => {
-    navigate('/create');
+    navigate("/create");
   };
 
   const onClickLogInHandler = () => {
-    navigate('/login');
+    navigate("/login");
   };
   const onClickSignUpeHandler = () => {
-    navigate('/signup');
+    navigate("/signup");
   };
 
   return (
     <StHeader>
       <StIconWrap>
-        <Link to='/'>
-          <img alt='logo' src={Logo} width='40px' />
+        <Link to="/">
+          <img alt="logo" src={Logo} width="40px" />
         </Link>
         <StLogo>감자마-켓</StLogo>
       </StIconWrap>

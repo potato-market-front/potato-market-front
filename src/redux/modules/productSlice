@@ -16,20 +16,8 @@ const initialState = {
   error: null,
 };
 
-
 const getProductsList = useCallback(async () => {
-    const { data } = await axios.get("http://localhost:3001/products");
-    console.log(data);
-    setCardList(data);
-  }, []);
-
-
-
-
-  export const replySlice = createSlice({
-    name: "replyList",
-    initialState,
-    reducers: {},
-    extraReducers: {
-        []
-    }})
+  const { data } = await axios.get("http://localhost:3001/products");
+  console.log(data);
+  setCardList(data);
+}, []);

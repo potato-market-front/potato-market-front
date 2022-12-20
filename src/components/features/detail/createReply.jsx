@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { postReply } from "../../../redux/modules/replySlice";
 import TextButton from "../../common/TextButton";

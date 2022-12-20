@@ -6,7 +6,6 @@ import Main from "../pages/Main";
 import Update from "../pages/Update";
 import SignUpPage from "../pages/Signup";
 import Detail from "../pages/Detail";
-import ProductList from "../components/features/main/ProductList";
 
 function Router() {
   return (
