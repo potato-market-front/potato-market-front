@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { authInstance } from "../../core/axios";
 
 const initialState = {
-  replyList: [],
+  commentList: [],
   // reply: {
   //   id: 1,
   //   content: "대댓글 내용입니다.",
@@ -13,11 +13,9 @@ const initialState = {
 export const getReply = createAsyncThunk(
   "reply/getreply",
   async (payload, thunkAPI) => {
-    // console.log("넘어온 값", payload);
+    console.log("넘어온 값", payload);
     try {
-      const response = await authInstance.get(
-        `/replyList?productId=${payload.detailId}`
-      );
+      const response = await authInstance.get(`/commnetList/${payload}`);
       // console.log("get api확인:", response);
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
@@ -38,12 +36,16 @@ export const getReply = createAsyncThunk(
 
 export const postReply = createAsyncThunk(
   "reply/postreply",
-  async (newReply, thunkAPI) => {
-    console.log(newReply);
+  async ({ productId, content }, thunkAPI) => {
+    console.log("받은내용", { productId, content });
+    console.log("content", content);
     try {
-      const response = await authInstance.post(`/replyList`, newReply);
+      const response = await authInstance.post(
+        `/api/products/${productId}/comments/0`,
+        { content }
+      );
       console.log("post api확인:", response);
-      return newReply;
+      return;
     } catch (error) {
       console.log("post api:", error);
       return thunkAPI.rejectWithValue(error);
@@ -57,7 +59,7 @@ export const updateReply = createAsyncThunk(
     console.log("바뀌는 값:", editReply);
     try {
       const response = await authInstance.put(
-        `/replyList/${editReply.id}`,
+        `/api/products/comments/${editReply.id}`,
         editReply
       );
       console.log("update api:", response);
@@ -74,7 +76,7 @@ export const deleteReply = createAsyncThunk(
   async (itemId, thunkAPI) => {
     console.log("delete 시 id값:", itemId);
     try {
-      await authInstance.delete(`/replyList/${itemId}`);
+      await authInstance.delete(`/api/products/comments/${itemId}`);
       return itemId;
       // 삭제는 json 서버에서 response를 받지 않는다 (삭제 시키기 때문에 json 서버에서 data가 존재하지 않는다 - json 서버의 특징)
     } catch (error) {
@@ -86,7 +88,7 @@ export const deleteReply = createAsyncThunk(
 
 // extraReducer
 export const replySlice = createSlice({
-  name: "replyList",
+  name: "commentList",
   initialState,
   reducers: {},
   extraReducers: {
@@ -104,11 +106,11 @@ export const replySlice = createSlice({
     [postReply.fulfilled]: (state, action) => {
       console.log("post action.payload:", action.payload);
       // state.replyList = { replyList: [...state.replyList, action.payload] };
-      state.replyList.push(action.payload);
+      state.commentList.push(action.payload);
     },
     [deleteReply.fulfilled]: (state, action) => {
       console.log("delete action.payload:", action.payload);
-      state.replyList = state.replyList.filter(
+      state.commentList = state.commentList.filter(
         (item) => item.id !== action.payload
       );
     },

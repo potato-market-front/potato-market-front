@@ -15,9 +15,7 @@ function Login() {
     postLogin({
       loginId,
       password,
-    });
-    console
-      .log("로그인시도:", loginId, password)
+    })
       .then((res) => {
         // 백으로 받은 리스폰스 (토큰 값))
         // 로컬스토리지에 저장했다 id라는 키값에

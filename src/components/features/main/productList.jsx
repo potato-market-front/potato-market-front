@@ -15,7 +15,6 @@ export default function ProductList() {
   console.log("전체 state:", select);
 
   const { products, error } = useSelector((state) => state.products);
-  console.log("products:", products);
 
   // const [cardList, setCardList] = useState([]);
 

@@ -1,57 +1,37 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { useParams } from "react-router-dom";
-import {
-  getReply,
-  getOneReply,
-  updateReply,
-} from "../../../redux/modules/replySlice";
+import { useParams } from "react-router-dom";
+import { updateReply } from "../../../redux/modules/replySlice";
 import TextButton from "../../common/TextButton";
 import Input from "../../common/Input";
 
 function UpdateReply() {
   const dispatch = useDispatch();
-  //   const param = useParams();
 
   // 전역 state를 불러오는 구간
-  const { error, replyList } = useSelector((state) => state.replyList);
-  console.log(replyList);
-  const reply = useSelector((state) => state.replyList.reply);
-  console.log("한개:", reply);
-  console.log("한개의 id:", reply.id);
-  console.log("한개의 content:", reply.content);
+  const select = useSelector((state) => state);
+  const productList = select.products.products;
+  console.log("productList:", productList);
 
+  // const comment = productList.commentList;
+  // console.log("댓글", comment);
   // 1개의 id만 가져오기
-  const id = reply.id;
-  console.log("1개 id:", id);
-  //   const id = replyObject.id;
+  // const id = comment.id;
+  // console.log("id", id);
+
+  const comment = [productList.commentList];
+  console.log("id시도:", comment);
 
   // 수정할 값을 불러오는 구간
-  const [content, setContent] = useState(reply.content);
-  console.log("수정할 값:", content);
+  const [content, setContent] = useState(productList.commentList);
 
   // 수정 상태인지 확인하는 구간
   const [replyDisplay, setreplyDisplay] = useState(false);
   console.log("replyDisplay 상태:", replyDisplay);
 
-  // getOneReply 해서 1개의 값 가져오기
-  useEffect(() => {
-    dispatch(getOneReply(reply.id));
-    // 렌더링 될 때 getOneReply가 한번 실행된다
-    console.log("getid 이펙트");
-    /*eslint-disable*/
-  }, [reply.content]);
-
-  useEffect(() => {
-    setContent(reply.content);
-    dispatch(getReply());
-    // 렌더링 될 때 setContent를 통해서 reply.content의 내용을 content에 반영한다.
-    console.log("이펙트");
-  }, [reply.content]);
-
   //
   const onEditHandler = () => {
-    const editReply = { id, content };
+    const editReply = { content };
     console.log("editReply:", editReply);
     if (content === "") {
       alert("답글 내용을 입력해주세요.");
@@ -60,10 +40,6 @@ function UpdateReply() {
       setreplyDisplay(false);
     }
   };
-
-  if (error) {
-    return <div>{error.message}</div>;
-  }
 
   if (replyDisplay === true) {
     // 깂이 true일 때 버튼 이름이 "저장"으로 변경

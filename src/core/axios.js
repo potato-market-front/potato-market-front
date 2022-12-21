@@ -12,6 +12,13 @@ export const authInstance = axios.create({
   // },
 });
 
+authInstance.interceptors.request.use((config) => {
+  if (config.headers === undefined) return;
+  const token = localStorage.getItem("id");
+  config.headers["Authorization"] = `${token}`;
+  return config;
+});
+
 // token이 넘어오면 그걸 받아서 토큰을 받으면 프론트에서 관리를 한다 - 어딘가에 저장한다.
 // 보통 웹스토리지에 저장 (로컬스토리지, 세션스토리지)
 // 저장하고 필요할때마다 갖고와서 사용한다.

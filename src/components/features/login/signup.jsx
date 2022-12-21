@@ -18,10 +18,10 @@ function SignUp() {
   const navigation = useNavigate();
 
   const onSignUp = () => {
-    const jsonData = { loginId, nickname, password };
-    const result = JSON.stringify(jsonData);
     postSignup({
-      result,
+      loginId,
+      nickname,
+      password,
     }).then((res) => {
       localStorage.setItem("id", res.headers.authorization);
       // 어떤 변수명에 토큰 받을지 서로 얘기해야함 (res.headers...)
@@ -33,9 +33,9 @@ function SignUp() {
   const idDup = () => {
     console.log("id값:", loginId);
     const jsonData = { loginId: loginId };
-    const result = JSON.stringify(jsonData);
-    console.log("result", result);
-    idDupCheck(result).then((response) => {
+    // const result = JSON.stringify(jsonData);
+    // console.log("result", result);
+    idDupCheck(jsonData).then((response) => {
       console.log("data:", response.status);
       // // res로 받아왔다 idDupCheck로부터
       // console.log("data:", data.data.statusCode);

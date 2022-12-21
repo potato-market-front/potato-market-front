@@ -1,10 +1,10 @@
 import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
-import replyList from "../modules/replySlice";
+import commentList from "../modules/replySlice";
 import products from "../modules/productSlice";
 
 const store = configureStore({
   reducer: {
-    replyList,
+    commentList,
     products,
   },
   middleware: getDefaultMiddleware({ serializableCheck: false }),

@@ -20,7 +20,7 @@ export default function ProductForm() {
   // const [image, setImage] = useState();
   // 'https://dnvefa72aowie.cloudfront.net/origin/article/202212/F4C802A00FB1B732CD39B1DE901A8D0BD5929CD3D51B3756FE7243F5ABEE6791.jpg?q=82&s=300x300&t=crop'
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   // const { id } = useParams();
 
@@ -33,6 +33,7 @@ export default function ProductForm() {
       alert("빈칸을 모두 채워주세요!");
     } else {
       dispatch(createProduct(newProduct));
+      navigate("/");
       alert("작성 완료!");
       setTitle("");
       setPrice("");
