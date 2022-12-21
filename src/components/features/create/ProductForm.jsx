@@ -11,22 +11,22 @@ export default function ProductForm({ type = 'create', productData }) {
   const [title, setTitle] = useState('');
   const [price, setPrice] = useState('');
   const [content, setContent] = useState('');
-  const [image, setImage] = useState(
-    // 'https://dnvefa72aowie.cloudfront.net/origin/article/202212/F4C802A00FB1B732CD39B1DE901A8D0BD5929CD3D51B3756FE7243F5ABEE6791.jpg?q=82&s=300x300&t=crop'
-  );
+  const [image, setImage] = useState();
+  // 'https://dnvefa72aowie.cloudfront.net/origin/article/202212/F4C802A00FB1B732CD39B1DE901A8D0BD5929CD3D51B3756FE7243F5ABEE6791.jpg?q=82&s=300x300&t=crop'
 
   const navigate = useNavigate();
 
   const { productId } = useParams();
 
   const getProductsList = useCallback(async () => {
-    const { data } = await axios.get(
-      `http://localhost:3001/products/${productId}`
-    );
-    setTitle(data.title);
-    setPrice(data.price);
-    setContent(data.content);
-    setImage(data.image);
+    const data = await axios
+      .get(`http://3.35.218.111/api/products/${productId}`)
+      .then((response) => {
+        setPrice(response.data.price);
+        setContent(response.data.content);
+        setImage(response.data.image);
+      })
+      .catch(function (error) {});
   }, [productId]);
 
   useEffect(() => {
@@ -36,7 +36,7 @@ export default function ProductForm({ type = 'create', productData }) {
   }, [getProductsList, type]);
 
   const updateProduct = async () => {
-    await axios.put(`http://localhost:3001/products/${productId}`, {
+    await axios.put(`http://3.35.218.111/api/products/${productId}`, {
       id: productId,
       title: title,
       price: price,
@@ -47,16 +47,23 @@ export default function ProductForm({ type = 'create', productData }) {
   };
 
   const createProduct = async () => {
-    await axios.post(`http://localhost:3001/products`, {
-      id: productId,
-      title: title,
-      price: price,
-      nickname: 'ssori',
-      content: content,
-      image: image,
-    });
+    await axios
+      .post(`http://3.35.218.111/api/products`, {
+        id: productId,
+        title: title,
+        price: price,
+        nickname: 'ssori',
+        content: content,
+        image: image,
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
-  
+
   const onSaveHandler = async (e) => {
     e.preventDefault();
     if (type === 'create') {
@@ -87,8 +94,8 @@ export default function ProductForm({ type = 'create', productData }) {
   };
 
   const onFileChangeHandler = (e) => {
-    let file = e.target
-  }
+    let file = e.target;
+  };
 
   return (
     <StCreateForm onSubmit={onSaveHandler}>
