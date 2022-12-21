@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 import { updateReply } from "../../../redux/modules/replySlice";
 import TextButton from "../../common/TextButton";
 import Input from "../../common/Input";

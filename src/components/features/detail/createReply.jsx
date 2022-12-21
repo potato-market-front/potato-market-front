@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { postReply } from "../../../redux/modules/replySlice";
 import TextButton from "../../common/TextButton";
@@ -19,6 +19,10 @@ function CreateReply() {
       setContent("");
     }
   };
+
+  useEffect(() => {
+    dispatch(postReply());
+  }, [dispatch]);
 
   return (
     <div>

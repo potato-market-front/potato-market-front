@@ -1,15 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { COLORS, GRAY_COLORS } from "../../../styles/colors";
-import { useState, useCallback } from "react";
-import axios from "axios";
-import { useEffect } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
-import {
-  createProduct,
-  updateProduct,
-} from "../../../redux/modules/productSlice";
+import { createProduct } from "../../../redux/modules/productSlice";
 
 // type은 create | update
 // { type = "create", productData }
@@ -137,12 +132,12 @@ const StButtonWrap = styled.div`
   padding: 4px 8px;
 `;
 
-/*
- * 이미지 리사이징 : 부모테그에 맞게 이미지 변경
- * 참고 :  https://nykim.work/86
- */
-const StImg = styled.img`
-  height: 100%;
-  width: 100%;
-  object-fit: contain;
-`;
+// /*
+//  * 이미지 리사이징 : 부모테그에 맞게 이미지 변경
+//  * 참고 :  https://nykim.work/86
+//  */
+// const StImg = styled.img`
+//   height: 100%;
+//   width: 100%;
+//   object-fit: contain;
+// `;

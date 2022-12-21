@@ -1,12 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { authInstance } from "../../core/axios";
+import { current } from "@reduxjs/toolkit";
 
 const initialState = {
   commentList: [],
-  // reply: {
-  //   id: 1,
-  //   content: "대댓글 내용입니다.",
-  // },
   error: null,
 };
 
@@ -38,14 +35,14 @@ export const postReply = createAsyncThunk(
   "reply/postreply",
   async ({ productId, content }, thunkAPI) => {
     console.log("받은내용", { productId, content });
-    console.log("content", content);
+    console.log("content", productId, content);
     try {
       const response = await authInstance.post(
         `/api/products/${productId}/comments/0`,
-        { content }
+        { productId, content }
       );
       console.log("post api확인:", response);
-      return;
+      return response.data;
     } catch (error) {
       console.log("post api:", error);
       return thunkAPI.rejectWithValue(error);
@@ -105,12 +102,12 @@ export const replySlice = createSlice({
     // },
     [postReply.fulfilled]: (state, action) => {
       console.log("post action.payload:", action.payload);
-      // state.replyList = { replyList: [...state.replyList, action.payload] };
       state.commentList.push(action.payload);
+      console.log("추가된 상태:", current(state.commentList));
     },
     [deleteReply.fulfilled]: (state, action) => {
       console.log("delete action.payload:", action.payload);
-      state.commentList = state.commentList.filter(
+      current(state).commentList = state.commentList.filter(
         (item) => item.id !== action.payload
       );
     },

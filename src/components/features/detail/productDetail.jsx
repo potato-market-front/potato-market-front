@@ -3,19 +3,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getProduct } from "../../../redux/modules/productSlice";
 import TextButton from "../../common/TextButton";
-import { deleteReply } from "../../../redux/modules/replySlice";
+import { deleteReply, getReply } from "../../../redux/modules/replySlice";
 import SmallButton from "../../common/SmallButton";
 import CreateReply from "../detail/CreateReply";
 
 function ProductDetail() {
   const { productId } = useParams();
-  // console.log("productId", Number(productId));
   const dispatch = useDispatch();
 
   // 전체 상태
   const select = useSelector((state) => state);
-  // console.log("전체 state:", select);
-  const [display, setDisplay] = useState(false);
 
   const productList = select.products.products;
   console.log("productList:", productList);
@@ -28,10 +25,11 @@ function ProductDetail() {
   const commentList = productDetail.commentList;
   console.log("댓글:", commentList);
 
-  // console.log("댓글1:", commentList[0].id);
-  // const productDetail = productList.find(
-  //   (item) => item.id === Number(productId)
-  // );
+  // useEffect(() => {
+  //   dispatch(getReply());
+  // }, [dispatch, commentList]);
+
+  const [display, setDisplay] = useState(false);
 
   const onDeleteHandler = (itemId) => {
     console.log(itemId);
@@ -40,12 +38,18 @@ function ProductDetail() {
 
   useEffect(() => {
     dispatch(getProduct(Number(productId)));
-  }, [dispatch]);
+  }, [dispatch, productId]);
 
   useEffect(() => {
     dispatch(getProduct());
-    console.log("시도확인");
-  }, [dispatch, productList.length]);
+  }, [dispatch, commentList.length]);
+
+  console.log("도착점:", commentList);
+
+  // useEffect(() => {
+  //   dispatch(getProduct());
+  //   console.log("시도확인");
+  // }, [dispatch, productList.length]);
 
   return (
     <div>

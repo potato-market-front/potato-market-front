@@ -1,10 +1,7 @@
-import React, { useCallback } from "react";
-import { Link, useParams } from "react-router-dom";
+import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
-import Card from "./Card";
-import { useState } from "react";
 import { useEffect } from "react";
-import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteProduct, getProduct } from "../../../redux/modules/productSlice";
 import Button from "../../common/Button";
@@ -14,7 +11,7 @@ export default function ProductList() {
   const select = useSelector((state) => state);
   console.log("전체 state:", select);
 
-  const { products, error } = useSelector((state) => state.products);
+  const { products } = useSelector((state) => state.products);
 
   // const [cardList, setCardList] = useState([]);
 
@@ -35,43 +32,53 @@ export default function ProductList() {
 
   return (
     <div className="container">
-      <StImgWrapper>
-        {products.map((v) => (
-          <Link to={`/detail/${v.id}`} key={v.id}>
-            <div>
-              <div style={{ marginBottom: "10px" }}>{v.id}</div>
-              <div style={{ fontSize: "1.2rem", marginBottom: "10px" }}>
-                제목: {v.title}
-              </div>
-              <div style={{ width: "1000px" }}>{v.content}</div>
-            </div>
-            {/* <Card
+      <div>
+        {products.map((item) => (
+          <div>
+            <Link
+              to={`/detail/${item.id}`}
+              key={item.id}
+              style={{ textDecoration: "none", color: "#285430" }}
+            >
+              <StList>
+                <div>
+                  <div style={{ marginBottom: "10px" }}>{item.id}</div>
+                  <div style={{ fontSize: "1.2rem", marginBottom: "10px" }}>
+                    제목: {item.title}
+                  </div>
+                  <div style={{ width: "1000px" }}>{item.content}</div>
+                </div>
+                {/* <Card
               key={v.id}
               id={v.id}
               imgSrc={v.image}
               title={v.title}
               price={v.price}
             /> */}
-            <Button
-              onClick={(event) => {
-                event.preventDefault();
-                onDeleteHandler(v.id);
-              }}
-            >
-              삭제
-            </Button>
-          </Link>
+                <div>
+                  <Button
+                    onClick={(event) => {
+                      event.preventDefault();
+                      onDeleteHandler(item.id);
+                    }}
+                  >
+                    삭제
+                  </Button>
+                </div>
+              </StList>
+            </Link>
+          </div>
         ))}
-      </StImgWrapper>
+      </div>
     </div>
   );
 }
 
-const StImgWrapper = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 20px 20px;
-  margin-top: 10px;
-  margin: 0 auto;
-  max-width: 600px;
+const StList = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+  border: 2px solid #fffbe9;
+  gap: 10px;
+  text-decoration: none;
 `;
