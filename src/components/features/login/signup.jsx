@@ -11,9 +11,19 @@ import {
 import TextButton from "../../common/TextButton";
 
 function SignUp() {
+  // 인풋 값 가져오기
   const [loginId, setLoginId] = useState("");
   const [nickname, setNickname] = useState("");
   const [password, setPassword] = useState("");
+
+  // 오류 메세지 출력
+  const [idMsg, setIdMsg] = useState("");
+  const [nameMsg, setNameMsg] = useState("");
+  const [passMsg, setPassMsg] = useState("");
+
+  // 유효성 검사
+  const [isId, setIsId] = useState(false);
+  const [isPass, setIsPass] = useState(false);
 
   const navigation = useNavigate();
 
@@ -36,15 +46,15 @@ function SignUp() {
     // const result = JSON.stringify(jsonData);
     // console.log("result", result);
     idDupCheck(jsonData).then((response) => {
-      console.log("data:", response.status);
+      console.log("data:", response);
       // // res로 받아왔다 idDupCheck로부터
       // console.log("data:", data.data.statusCode);
       // // const id = JSON.parse(data);
-      if (response.status === 200) {
-        alert("사용 가능한 ID입니다.");
+      if (response.data.statusCode === 200) {
+        setIdMsg("사용 가능한 ID입니다.");
         setLoginId(loginId);
-      } else if (response.status === 400) {
-        alert("이미 사용중인 ID입니다.");
+      } else {
+        setIdMsg("이미 사용중인 ID입니다.");
         setLoginId("");
       }
     });
@@ -56,13 +66,38 @@ function SignUp() {
     nickDupCheck(result).then((data) => {
       console.log("Nick 중복:", data);
       if (data.data.statusCode === 200) {
-        alert("사용 가능한 Nickname입니다.");
+        setNameMsg("사용 가능한 Nickname입니다.");
         setNickname(nickname);
       } else {
-        alert("이미 사용중인 Nickname입니다.");
+        setNameMsg("이미 사용중인 Nickname입니다.");
         setNickname("");
       }
     });
+  };
+
+  const onChangeId = (e) => {
+    const currentId = e.target.value;
+    setLoginId(currentId);
+    const idRegExp = /^[a-z0-9]{4,10}$/;
+
+    if (!idRegExp.test(currentId)) {
+      setIdMsg("4-10자 소문자와 숫자로 입력해주세요.");
+      setIsId(false);
+    } else {
+      setIsId(true);
+    }
+  };
+
+  const onChangePassword = (e) => {
+    const currentPassword = e.target.value;
+    setPassword(currentPassword);
+    const passRegExp = /^[a-zA-Z0-9!@#$%^&*]{8,15}$/;
+    if (!passRegExp.test(currentPassword)) {
+      setPassMsg("8-15자의 대소문자, 숫자, 특수문자(!@#$%^&*)로 입력해주세요.");
+      setIsPass(false);
+    } else {
+      setIsPass(true);
+    }
   };
 
   return (
@@ -72,9 +107,7 @@ function SignUp() {
         <StInputnButton>
           <Input
             value={loginId}
-            onChange={(event) => {
-              setLoginId(event.target.value);
-            }}
+            onChange={onChangeId}
             type="text"
             name="id"
             label="ID를 입력하세요."
@@ -82,6 +115,15 @@ function SignUp() {
           ></Input>
           <TextButton onClick={idDup}>중복확인</TextButton>
         </StInputnButton>
+        <p
+          style={{
+            fontSize: "11px",
+            color: "red",
+            padding: "0",
+          }}
+        >
+          {idMsg}
+        </p>
         <StInputnButton>
           <Input
             value={nickname}
@@ -95,11 +137,17 @@ function SignUp() {
           ></Input>
           <TextButton onClick={nickDup}>중복확인</TextButton>
         </StInputnButton>
+        <p
+          style={{
+            fontSize: "11px",
+            color: "red",
+          }}
+        >
+          {nameMsg}
+        </p>
         <div>
           <Input
-            onChange={(event) => {
-              setPassword(event.target.value);
-            }}
+            onChange={onChangePassword}
             type="password"
             name="password"
             label="비밀번호를 입력하세요."
@@ -107,6 +155,14 @@ function SignUp() {
           ></Input>
         </div>
       </StInputGroup>
+      <p
+        style={{
+          fontSize: "11px",
+          color: "red",
+        }}
+      >
+        {passMsg}
+      </p>
       <StButtonGroup>
         <div>
           <Button width={"250px"} onClick={onSignUp}>
@@ -133,7 +189,7 @@ const StTopContainer = styled.div`
   align-items: center;
   margin-top: 100px;
 
-  gap: 50px;
+  gap: 30px;
 `;
 
 const StInputGroup = styled.div`

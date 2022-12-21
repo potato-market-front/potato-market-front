@@ -42,9 +42,9 @@ export default function ProductList() {
             >
               <StList>
                 <div>
-                  <div style={{ marginBottom: "10px" }}>{item.id}</div>
+                  <div style={{ marginBottom: "10px" }}>{item.id}번 나무</div>
                   <div style={{ fontSize: "1.2rem", marginBottom: "10px" }}>
-                    제목: {item.title}
+                    {item.title}
                   </div>
                   <div style={{ width: "1000px" }}>{item.content}</div>
                 </div>
@@ -76,9 +76,19 @@ export default function ProductList() {
 
 const StList = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   padding: 40px;
   border: 2px solid #fffbe9;
   gap: 10px;
   text-decoration: none;
+  align-items: center;
 `;
+
+// const StImgWrapper = styled.div`
+//   display: grid;
+//   grid-template-columns: 1fr 1fr 1fr;
+//   gap: 20px 20px;
+//   margin-top: 10px;
+//   margin: 0 auto;
+//   max-width: 600px;
+// `;

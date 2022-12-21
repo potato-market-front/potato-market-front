@@ -4,6 +4,7 @@ import { current } from "@reduxjs/toolkit";
 
 const initialState = {
   commentList: [],
+  isSuccess: false,
   error: null,
 };
 
@@ -102,6 +103,7 @@ export const replySlice = createSlice({
     // },
     [postReply.fulfilled]: (state, action) => {
       console.log("post action.payload:", action.payload);
+      state.isSuccess = true;
       state.commentList.push(action.payload);
       console.log("추가된 상태:", current(state.commentList));
     },
