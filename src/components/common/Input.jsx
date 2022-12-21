@@ -1,3 +1,4 @@
+import { toUnitless } from "@mui/material/styles/cssUtils";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 // import PropTypes from "prop-types";
@@ -33,7 +34,7 @@ const StyledInput = styled.div`
   }
 `;
 
-function Input({ label, name, onChange, value, width }) {
+function Input({ label, name, onChange, value, width, type }) {
   const [hasContent, setHasContent] = useState(false);
 
   const handleFloat = (event) => {
@@ -56,7 +57,7 @@ function Input({ label, name, onChange, value, width }) {
     <StyledInput width={width}>
       <input
         name={name}
-        type="text"
+        type={type}
         placeholder=""
         onBlur={handleFloat}
         className={hasContent ? "has-content" : ""}

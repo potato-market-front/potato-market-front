@@ -11,11 +11,8 @@ function Detail() {
       <Header />
       <Layout>
         <ProductDetail />
-        <CreateComment />
-        <CommentList />
       </Layout>
     </>
   );
 }
 export default Detail;
-

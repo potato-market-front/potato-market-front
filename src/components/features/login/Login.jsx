@@ -3,6 +3,12 @@ import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "../../common/Button";
 import Input from "../../common/Input";
+<<<<<<< HEAD:src/components/features/login/login.jsx
+import { postLogin } from "../../../redux/modules/login";
+
+function Login() {
+  const [loginId, setLoginId] = useState("");
+=======
 import { authInstance } from "../../../core/axios";
 // import { postLogin } from "../../../redux/modules/login";
 
@@ -17,17 +23,30 @@ function Login() {
   };
 
   const [id, setId] = useState("");
+>>>>>>> dev:src/components/features/login/Login.jsx
   const [password, setPassword] = useState("");
 
   const navigation = useNavigate();
 
   const onLogin = () => {
     postLogin({
+<<<<<<< HEAD:src/components/features/login/login.jsx
+      loginId,
+      password,
+    })
+      .then((res) => {
+        // 백으로 받은 리스폰스 (토큰 값))
+        // 로컬스토리지에 저장했다 id라는 키값에
+        // 이 코드를 거치면 로컬스토리지에 토큰값이 저장되어있다,.
+        //localStorage.setItem, getItem 이미 있는 내장함수 (검색해보기)
+        localStorage.setItem("id", res.headers.authorization); // 헤더에 id 토큰값을 실어왔다
+=======
       id,
       password,
     })
       .then((res) => {
         localStorage.setItem("id", res.headers.authorization);
+>>>>>>> dev:src/components/features/login/Login.jsx
         navigation("/");
       })
       .catch((error) => console.log(error));
@@ -40,8 +59,14 @@ function Login() {
       <StInputGroup>
         <div>
           <Input
+<<<<<<< HEAD:src/components/features/login/login.jsx
+            value={loginId}
+            onChange={(event) => {
+              setLoginId(event.target.value);
+=======
             onChange={(event) => {
               setId(event.target.value);
+>>>>>>> dev:src/components/features/login/Login.jsx
             }}
             type="text"
             name="id"

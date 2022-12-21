@@ -7,19 +7,16 @@ import { Pencil } from '../../assets/svg';
 import { useNavigate } from 'react-router-dom';
 
 export default function Header() {
-  // TODO: redux에서 로그인 상태 관리하기
-  const [isLogin, setIsLogin] = useState(false);
   const navigate = useNavigate();
 
   const onClickCreateHandler = () => {
     navigate('/create');
   };
 
-  const onClickLogInHandler = () => {
+  const onLoginOutHandler = () => {
+    alert('로그아웃 되었습니다.');
     navigate('/login');
-  };
-  const onClickSignUpeHandler = () => {
-    navigate('/signup');
+    localStorage.clear();
   };
 
   return (
@@ -35,14 +32,7 @@ export default function Header() {
           <StWriteSpan>작성하기</StWriteSpan>
           <Pencil />
         </StHeaderButton>
-        {isLogin ? (
-          <StHeaderButton>로그아웃</StHeaderButton>
-        ) : (
-          <StHeaderButton onClick={onClickLogInHandler}>로그인</StHeaderButton>
-        )}
-        <StHeaderButton onClick={onClickSignUpeHandler}>
-          회원가입
-        </StHeaderButton>
+        <StHeaderButton onClick={onLoginOutHandler}>로그아웃</StHeaderButton>
       </StButtonWrap>
     </StHeader>
   );
@@ -54,7 +44,7 @@ const StHeader = styled.header`
   justify-content: space-between;
   padding: 0 24px;
   background-color: ${COLORS.BASE};
-  height: 36px;
+  height: 50px;
 `;
 const StIconWrap = styled.div`
   display: flex;
@@ -62,7 +52,7 @@ const StIconWrap = styled.div`
 `;
 const StLogo = styled.span`
   margin: 0 8px;
-  font-size: 12px;
+  font-size: 14px;
 `;
 const StButtonWrap = styled.div`
   display: flex;
@@ -77,7 +67,7 @@ const StHeaderButton = styled.button`
   justify-content: center;
   background-color: transparent;
   border: transparent;
-  font-size: 12px;
+  font-size: 14px;
   cursor: pointer;
 `;
 const StWriteSpan = styled.span`
