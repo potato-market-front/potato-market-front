@@ -26,7 +26,7 @@ function SignUp() {
       localStorage.setItem('id', res.headers.authorization);
       // 어떤 변수명에 토큰 받을지 서로 얘기해야함 (res.headers...)
       //
-      navigation('/login');
+      navigation('/main');
     });
   };
 

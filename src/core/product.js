@@ -1,6 +1,7 @@
 import { instance, authInstance } from './axios';
 
 // 리스트불러오기
+// 완료
 export const getProduct = async () => {
   try {
     const data = await instance.get(`/api/products`);
@@ -21,6 +22,7 @@ export const createProduct = async (data) => {
 };
 
 // product 상세조회
+//
 export const getDetailProduct = async (productId) => {
   try {
     const data = await instance.get(`/api/products/${productId}`);

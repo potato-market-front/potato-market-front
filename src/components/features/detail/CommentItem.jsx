@@ -27,7 +27,7 @@ export default function CommentItem(props) {
   };
 
   const onDeleteComment = () => {
-    deleteAuthComment();
+    deleteAuthComment(commentId);
   };
 
   // onChange 함수

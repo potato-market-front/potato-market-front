@@ -5,6 +5,7 @@ import { COLORS, GRAY_COLORS } from '../../../styles/colors';
 import { useState, useCallback } from 'react';
 import axios from 'axios';
 import { useEffect } from 'react';
+import useLoginChecker from '../../../hook/useLoginChecker';
 import {
   createProduct,
   getDetailProduct,
@@ -17,6 +18,9 @@ export default function ProductForm({ type = 'create', productData }) {
   const [price, setPrice] = useState('');
   const [content, setContent] = useState('');
   const [image, setImage] = useState();
+  // 로그인 유무 확인
+  const [isLogin] = useLoginChecker();
+
   // 'https://dnvefa72aowie.cloudfront.net/origin/article/202212/F4C802A00FB1B732CD39B1DE901A8D0BD5929CD3D51B3756FE7243F5ABEE6791.jpg?q=82&s=300x300&t=crop'
 
   const navigate = useNavigate();
@@ -49,7 +53,7 @@ export default function ProductForm({ type = 'create', productData }) {
       };
       await createProduct(tempData);
       alert('작성 완료!');
-      navigate('/');
+      navigate('/main');
     }
 
     if (type === 'update') {
@@ -60,7 +64,7 @@ export default function ProductForm({ type = 'create', productData }) {
       };
       await updateProduct(productId, tempData);
       alert('수정 완료!');
-      navigate('/');
+      navigate('/main');
     }
   };
 

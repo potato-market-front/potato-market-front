@@ -5,12 +5,12 @@ import { customAlphabet } from 'nanoid';
 
 // 코멘트 생성
 export const createAuthComment = async (productId, comment) => {
-  const nanoid = customAlphabet('01234567899', 6);
-
-  const commentsId = nanoid();
+  // const nanoid = customAlphabet('01234567899', 6);
+  // const commentsId = nanoid();
   try {
     const data = await authInstance.post(
-      `api/products/${productId}/comments/${commentsId}`,
+      `api/products/${productId}/comments`,
+      // `api/products/${productId}/comments/${commentsId}`,
       {
         comment: comment,
       }

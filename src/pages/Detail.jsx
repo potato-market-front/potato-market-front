@@ -6,21 +6,15 @@ import ReplyList from '../components/features/detail/ReplyList';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
+import { getDetailProduct } from '../core/product';
 
 function Detail() {
   const [detailProduct, setDetailProduct] = useState({});
   const { productId } = useParams();
 
   const getProductsDetail = useCallback(async () => {
-    try {
-      const { data } = await axios.get(
-        `http://3.35.218.111/api/products/${productId}`
-      );
-      setDetailProduct(data);
-    } catch (error) {
-      console.log(error);
-      throw error;
-    }
+    const { data } = await getDetailProduct(productId);
+    setDetailProduct(data);
   }, [productId]);
 
   useEffect(() => {

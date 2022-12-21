@@ -22,7 +22,7 @@ function Login() {
         // 이 코드를 거치면 로컬스토리지에 토큰값이 저장되어있다,.
         //localStorage.setItem, getItem 이미 있는 내장함수 (검색해보기)
         localStorage.setItem('id', res.headers.authorization); // 헤더에 id 토큰값을 실어왔다
-        navigation('/');
+        navigation('/main');
       })
       .catch((error) => console.log(error));
   };

@@ -5,6 +5,7 @@ import { COLORS, GRAY_COLORS } from '../../../styles/colors';
 import SmallButton from '../../common/SmallButton';
 
 import { useNavigate, useParams } from 'react-router-dom';
+import { deleteProduct } from '../../../core/product';
 
 export default function ProductDetail({ detailProduct }) {
   const { title, image, price, content } = detailProduct;
@@ -13,11 +14,16 @@ export default function ProductDetail({ detailProduct }) {
   const onClickToUpdate = () => {
     navigate(`/update/${productId}`);
   };
+  const onClickDelete = async () => {
+    await deleteProduct(productId);
+    navigate(`/`);
+  };
 
   return (
     <StContainer>
       <StButtonWrap>
         <SmallButton onClick={onClickToUpdate}>게시글 수정</SmallButton>
+        <SmallButton onClick={onClickDelete}>게시글 삭제</SmallButton>
       </StButtonWrap>
       <StDetilProductContainer>
         <StImgContainer>

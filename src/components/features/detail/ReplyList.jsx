@@ -5,11 +5,12 @@ import { useParams } from 'react-router-dom';
 
 import CommentItem from './CommentItem';
 import TextButton from '../../common/TextButton';
-import { createAuthComment } from '../../../core/comment';
+import { createAuthComment, testComment } from '../../../core/comment';
 
 function ReplyList({ detailProduct }) {
   const { commentList } = detailProduct;
   const [comment, setComment] = useState('');
+  console.log(detailProduct);
 
   const { productId } = useParams();
 
