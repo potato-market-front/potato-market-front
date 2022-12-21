@@ -1,10 +1,11 @@
+import { toUnitless } from "@mui/material/styles/cssUtils";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 
 const StyledInput = styled.div`
-  width: 100%;
-  margin: 0 auto;
+  width: ${(props) => props.width || "auto"};
+  margin: auto;
   position: relative;
   input {
     width: 100%;
@@ -33,7 +34,7 @@ const StyledInput = styled.div`
   }
 `;
 
-function Input({ label, name, onChange, value }) {
+function Input({ label, name, onChange, value, width, type }) {
   const [hasContent, setHasContent] = useState(false);
 
   const handleFloat = (event) => {
@@ -53,10 +54,10 @@ function Input({ label, name, onChange, value }) {
   }, [value]);
 
   return (
-    <StyledInput>
+    <StyledInput width={width}>
       <input
         name={name}
-        type="text"
+        type={type}
         placeholder=""
         onBlur={handleFloat}
         className={hasContent ? "has-content" : ""}
@@ -70,11 +71,11 @@ function Input({ label, name, onChange, value }) {
   );
 }
 
-Input.propTypes = {
-  label: PropTypes.node.isRequired,
-  name: PropTypes.node.isRequired,
-  // onChange: PropTypes.node.isRequired,
-  // value: PropTypes.node.isRequired,
-};
+// Input.propTypes = {
+//   label: PropTypes.node.isRequired,
+//   name: PropTypes.node.isRequired,
+//   // onChange: PropTypes.node.isRequired,
+//   // value: PropTypes.node.isRequired,
+// };
 
 export default Input;

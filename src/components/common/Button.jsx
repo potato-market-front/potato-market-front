@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 const StyledBtn = styled.button`
   display: inline-block;
   width: ${(props) => props.width || "auto"};
-  height: 45px;
+  height: ${(props) => props.height || "45px"};
   padding: 10px 20px;
   border-radius: 6px;
   border-width: 2px;
@@ -30,17 +30,17 @@ const StyledBtn = styled.button`
   }
 `;
 
-function Button({ width, color, children, onClick }) {
+function Button({ width, height, color, children, onClick }) {
   return (
-    <StyledBtn width={width} color={color} onClick={onClick}>
+    <StyledBtn width={width} height={height} color={color} onClick={onClick}>
       <span>{children}</span>
     </StyledBtn>
   );
 }
 
-Button.propTypes = {
-  color: PropTypes.node.isRequired,
-  children: PropTypes.node.isRequired,
-  // onClick: PropTypes.node.isRequired,
-};
+// Button.propTypes = {
+//   // color: PropTypes.node.isRequired,
+//   // children: PropTypes.node.isRequired,
+//   // onClick: PropTypes.node.isRequired,
+// };
 export default Button;
