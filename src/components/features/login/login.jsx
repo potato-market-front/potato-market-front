@@ -9,6 +9,8 @@ function Login() {
   const [loginId, setLoginId] = useState("");
   const [password, setPassword] = useState("");
 
+  // 오류 메세지 출력
+
   const navigation = useNavigate();
 
   const onLogin = () => {
@@ -24,7 +26,9 @@ function Login() {
         localStorage.setItem("id", res.headers.authorization); // 헤더에 id 토큰값을 실어왔다
         navigation("/");
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log("error 들어옴:", error);
+      });
   };
 
   return (
