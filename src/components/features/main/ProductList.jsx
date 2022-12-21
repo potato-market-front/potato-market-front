@@ -9,8 +9,13 @@ export default function ProductList() {
   const [products, setProducts] = useState([]);
 
   const getProductsList = useCallback(async () => {
-    const { data } = await axios.get('http://localhost:3001/products');
-    setProducts(data);
+    await axios
+      .get('http://3.35.218.111/api/products')
+      .then((response) => {
+        // console.log(response.data);
+        setProducts(response.data);
+      })
+      .catch(function (error) {});
   }, []);
 
   useEffect(() => {

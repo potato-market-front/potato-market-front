@@ -10,6 +10,7 @@ import { useEffect } from 'react';
 
 export default function ProductDetail() {
   const [product, setProduct] = useState({});
+  console.log(product);
   const navigate = useNavigate();
   const { productId } = useParams();
 
@@ -18,10 +19,13 @@ export default function ProductDetail() {
   };
 
   const getProductsList = useCallback(async () => {
-    const { data } = await axios.get(
-      `http://localhost:3001/products/${productId}`
-    );
-    setProduct(data);
+    await axios
+      .get(`http://3.35.218.111/api/products/${productId}`)
+      .then((response) => {
+        // console.log(response.data);
+        setProduct(response.data);
+      })
+      .catch(function (error) {});
   }, [productId]);
 
   useEffect(() => {
@@ -48,7 +52,7 @@ export default function ProductDetail() {
 const StImg = styled.img`
   height: 100%;
   width: 100%;
-  object-fit: contain;
+  object-fit: cover;
 `;
 const StDetilProductContainer = styled.section`
   position: relative;
