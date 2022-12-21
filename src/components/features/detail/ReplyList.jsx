@@ -1,164 +1,92 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import TextButton from '../../common/TextButton';
 import SmallButton from '../../common/SmallButton';
-import Input from '../../common/Input';
-import {
-  getReply,
-  postReply,
-  updateReply,
-  deleteReply,
-} from '../../../redux/modules/replySlice';
+
 import { useParams } from 'react-router-dom';
+import { COLORS } from '../../../styles/colors';
+import axios from 'axios';
+import CommentItem from './CommentItem';
+import TextButton from '../../common/TextButton';
 
-function ReplyList() {
-  const dispatch = useDispatch();
+function ReplyList({ detailProduct }) {
+  const { id, nickname, content, createdAt, commentList } = detailProduct;
+  const [comment, setComment] = useState('');
+
   const { productId } = useParams();
-  // const { error, commentList } = useSelector((state) => state.commentList);
-  const [display, setDisplay] = useState(false);
-  // 수정 상태인지 확인하는 구간
-  // const [replyDisplay, setreplyDisplay] = useState(false);
-  const commentList = useSelector((state) => state);
-  console.log({ commentList });
+  console.log('replylist', detailProduct);
 
-  // updateReply와 연결되는 부분
-  // const reply = useSelector((state) => state.replyList.reply);
-  // const [content, setContent] = useState(reply.content);
-  // console.log('한개:', reply);
-  // console.log('한개의 id:', reply.id);
-  // console.log('한개의 content:', reply.content);
-
-  // 1개의 id만 가져오기
-  // const id = reply.id;
-
-  // 수정할 값을 불러오는 구간
-  // console.log('수정할 값:', content);
-
-  useEffect(() => {
-    dispatch(getReply(productId));
-  }, [dispatch, productId]);
-
-  // // getOneReply 해서 1개의 값 가져오기
-  // useEffect(() => {
-  //   dispatch(getOneReply(reply.id));
-  //   // 렌더링 될 때 getOneReply가 한번 실행된다
-  //   console.log('getid 이펙트');
-  //   /*eslint-disable*/
-  // }, [reply.content]);
-
-  // useEffect(() => {
-  //   setContent(reply.content);
-  //   console.log('이펙트');
-  // }, [reply]);
-
-  // if (error) {
-  //   return <div>{error.message}</div>;
-  // }
-
-  const onDeleteHandler = (itemId) => {
-    console.log(itemId);
-    dispatch(deleteReply(itemId));
+  const onChangeHandler = (e) => {
+    setComment(e.target.value);
   };
 
-  // const onEditHandler = () => {
-  //   const editReply = { id, content };
-  //   console.log('editReply:', editReply);
-  //   if (content === '') {
-  //     alert('답글 내용을 입력해주세요.');
-  //   } else {
-  //     dispatch(updateReply(editReply));
-  //     setreplyDisplay(false);
-  //   }
-  // };
+  const createComment = () => {
+    axios.post(
+      `http://3.35.218.111/api/products/${productId}/comments/${productId}`,
+      { comment: comment }
+    );
+  };
 
-  // if (replyDisplay === true) {
-  //   // 깂이 true일 때 버튼 이름이 "저장"으로 변경
-  //   return (
-  // <div>
-  //   <Input
-  //     lebel='답글을 입력해주세요.'
-  //     value={content}
-  //     onChange={(event) => {
-  //       setContent(event.target.value);
-  //     }}
-  //   ></Input>
-  //   <TextButton onClick={onEditHandler}>Save</TextButton>
-  //   <TextButton
-  //     onClick={() => {
-  //       setreplyDisplay(false);
-  //     }}
-  //   >
-  //     Cancel
-  //   </TextButton>
-  // </div>
-  // );
-  // )
-  // }
+  const onSubmit = (e) => {
+    e.preventDefault();
+    if (comment === '') {
+      alert('답글 내용을 입력해주세요.');
+    }
+    try {
+      createComment();
+    } catch (error) {
+      throw error;
+    }
+  };
 
   return (
     <div>
-      <SmallButton
-        color='red'
-        onClick={() => {
-          setDisplay(!display);
-        }}
-      >
-        {display && 'Hide'}
-        {/* {!display &&
-          (replyList.length === 0
-            ? 'Replies'
-            : `View ${replyList.length} more replies`)} */}
-      </SmallButton>
-      <div>
-        {display &&
-          commentList.map((item) => (
-            <div key={item.id}>
-              <div
-                style={{
-                  border: '1px solid #DAE2B6',
-                  padding: '10px',
-                  margin: '5px auto',
-                }}
-              >
-                {/* <div style={{ fontSize: "0.7rem" }}>{item.nickname}</div> */}
-                <div style={{ fontSize: '11px' }}>{item.nickname}</div>
-                <div>{item.content}</div>
-                <div style={{ fontSize: '10px' }}>{item.createdAt}</div>
-              </div>
-              <div>
-                <TextButton
-                  margin={'5px'}
-                  onClick={() => {
-                    onDeleteHandler(item.id);
-                  }}
-                >
-                  Delete
-                </TextButton>
-                <TextButton
-                  onClick={() => {
-                    // setreplyDisplay(true);
-                    // 지금 일단 false인데, 수정 버튼 누르면 setreplyDisplay를 통해 값을 true로 바꾸라는 뜻
-                  }}
-                >
-                  Edit
-                </TextButton>
-                {/* <UpdateReply /> */}
-                {/* <Component key={item.id} content={content} /> */}
-              </div>
-            </div>
-          ))}
-      </div>
+      <StInputForm onSubmit={onSubmit}>
+        <StInput placeholder='댓글쓰기' onChange={onChangeHandler} />
+        <StButtonsWrap>
+          <TextButton onClick={onSubmit}>Comment</TextButton>
+        </StButtonsWrap>
+      </StInputForm>
+      {/* 없을경우 에러 핸들링 */}
+      {commentList &&
+        commentList.map((v) => (
+          <CommentItem
+            key={v.id}
+            commentId={v.id}
+            content={v.content}
+            nickName={v.nickname}
+            createdAt={v.createdAt}
+          />
+        ))}
     </div>
   );
 }
 
 export default ReplyList;
 
-// Update랑 List랑 합쳐서 state를 하나 줘야한다 (boolean)
+const StInputForm = styled.form`
+  border-style: solid;
+  border-width: 1px;
+  border-color: #dae2b6;
+  padding: 10px;
+  margin: 5px auto;
+  display: flex;
+  flex-direction: column;
+`;
 
-const StInputGroup = styled.div`
-  margin-top: 20px;
-  gap: 30px;
+const StInput = styled.input`
+  width: 100%;
+  height: 30px;
+  padding: 8px;
+  margin: 16px 0px;
+  border: transparent;
+  &:focus {
+    outline: none;
+  }
+`;
+const StButtonsWrap = styled.div`
+  width: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
