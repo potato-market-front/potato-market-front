@@ -47,6 +47,7 @@ function ReplyList({ detailProduct }) {
           <TextButton onClick={onSubmit}>Comment</TextButton>
         </StButtonsWrap>
       </StInputForm>
+      Comments
       {/* 없을경우 에러 핸들링 */}
       {commentList &&
         commentList.map((v) => (

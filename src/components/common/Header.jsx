@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { useState } from 'react';
 import { COLORS } from '../../styles/colors';
 import Logo from '../../assets/png/potato.png';
 import { Link } from 'react-router-dom';
