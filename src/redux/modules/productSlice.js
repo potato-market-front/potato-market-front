@@ -23,6 +23,7 @@ export const getProduct = createAsyncThunk(
 export const getOneProduct = createAsyncThunk(
   "product/getOneProduct",
   async (productId, thunkAPI) => {
+    console.log("getOne의 productId:", productId);
     try {
       const response = await authInstance.get(
         `/api/products/${productId}`,
@@ -86,6 +87,10 @@ export const productSlice = createSlice({
   extraReducers: {
     [getProduct.fulfilled]: (state, action) => {
       console.log("product get payload:", action.payload);
+      state.products = action.payload;
+    },
+    [getOneProduct.fulfilled]: (state, action) => {
+      console.log("product get one payload:", action.payload);
       state.products = action.payload;
     },
     [createProduct.fulfilled]: (state, action) => {

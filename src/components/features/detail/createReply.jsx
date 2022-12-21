@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { postReply } from "../../../redux/modules/replySlice";
 import TextButton from "../../common/TextButton";
@@ -6,26 +6,30 @@ import Input from "../../common/Input";
 import { useParams } from "react-router-dom";
 
 function CreateReply() {
-  const [replyInput, setReplyInput] = useState("");
+  const [content, setContent] = useState("");
   const { productId } = useParams();
 
   const dispatch = useDispatch();
 
   const onPostHandler = () => {
-    if (replyInput === "") {
+    if (content === "") {
       alert("답글 내용을 입력해주세요.");
     } else {
-      dispatch(postReply({ productId, content: replyInput }));
-      setReplyInput("");
+      dispatch(postReply({ productId, content }));
+      setContent("");
     }
   };
+
+  useEffect(() => {
+    dispatch(postReply());
+  }, [dispatch]);
 
   return (
     <div>
       <Input
-        value={replyInput}
+        value={content}
         onChange={(event) => {
-          setReplyInput(event.target.value);
+          setContent(event.target.value);
         }}
       />
       <div>
