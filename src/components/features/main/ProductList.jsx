@@ -9,7 +9,7 @@ export default function ProductList() {
   const [products, setProducts] = useState([]);
 
   const getProductsList = useCallback(async () => {
-    const data = await axios
+    await axios
       .get('http://3.35.218.111/api/products')
       .then((response) => {
         // console.log(response.data);
