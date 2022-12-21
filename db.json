@@ -1,8 +1,4 @@
 {
-<<<<<<< HEAD
-  "products": [],
-  "replyList": []
-=======
   "replyList": [
     {
       "content": "1111",
@@ -325,5 +321,4 @@
       ]
     }
   ]
->>>>>>> dev
 }
