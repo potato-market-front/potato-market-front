@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { COLORS, GRAY_COLORS } from '../../../styles/colors';
-import axios from 'axios';
+
 import SmallButton from '../../common/SmallButton';
 
 import { useNavigate, useParams } from 'react-router-dom';
@@ -15,7 +15,7 @@ export default function ProductDetail({ detailProduct }) {
   };
 
   return (
-    <>
+    <StContainer>
       <StButtonWrap>
         <SmallButton onClick={onClickToUpdate}>게시글 수정</SmallButton>
       </StButtonWrap>
@@ -27,10 +27,10 @@ export default function ProductDetail({ detailProduct }) {
         <StSpan>{price}</StSpan>
         <StContent>{content}</StContent>
       </StDetilProductContainer>
-    </>
+    </StContainer>
   );
 }
-
+const StContainer = styled.div``;
 const StImg = styled.img`
   height: 100%;
   width: 100%;
@@ -38,13 +38,11 @@ const StImg = styled.img`
 `;
 const StDetilProductContainer = styled.section`
   position: relative;
-  width: 320px;
-  margin: 0 auto;
 `;
 const StButtonWrap = styled.div`
   position: absolute;
-  top: 24px;
-  right: 24px;
+  top: 0px;
+  right: 0px;
 `;
 const StImgContainer = styled.div`
   width: 100%;

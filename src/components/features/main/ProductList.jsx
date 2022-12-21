@@ -3,19 +3,14 @@ import styled from 'styled-components';
 import Card from './Card';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import axios from 'axios';
+import { getProduct } from '../../../core/product';
 
 export default function ProductList() {
   const [products, setProducts] = useState([]);
 
   const getProductsList = useCallback(async () => {
-    try {
-      const { data } = await axios.get('http://3.35.218.111/api/products');
-      console.log(data);
-      setProducts(data);
-    } catch (error) {
-      throw error;
-    }
+    const { data } = await getProduct();
+    setProducts(data);
   }, []);
 
   useEffect(() => {

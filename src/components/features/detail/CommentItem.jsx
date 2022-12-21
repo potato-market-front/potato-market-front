@@ -1,37 +1,14 @@
 import TextButton from '../../common/TextButton';
 import { useState } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
+
+import { deleteAuthComment, updateAuthComment } from '../../../core/comment';
 
 export default function CommentItem(props) {
   const { commentId, content, createdAt, nickName } = props;
   // type : none, edit
   const [commentType, setCommentType] = useState('none');
   const [comment, setComment] = useState('');
-
-  // axios 통신
-  const updateComment = async () => {
-    try {
-      await axios.post(
-        `http://3.35.218.111/api/products/comments/${commentId}`,
-        {
-          comment: comment,
-        }
-      );
-    } catch (error) {
-      throw error;
-    }
-  };
-
-  const deleteComment = async () => {
-    try {
-      await axios.delete(
-        `http://3.35.218.111/api/products/comments/${commentId}`
-      );
-    } catch (error) {
-      throw error;
-    }
-  };
 
   // onClick 함수
 
@@ -45,12 +22,12 @@ export default function CommentItem(props) {
   };
 
   const onEditSubmit = () => {
-    updateComment();
+    updateAuthComment(commentId, comment);
     setCommentType('none');
   };
 
   const onDeleteComment = () => {
-    deleteComment();
+    deleteAuthComment();
   };
 
   // onChange 함수

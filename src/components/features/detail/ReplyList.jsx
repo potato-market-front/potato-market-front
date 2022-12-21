@@ -1,30 +1,20 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import SmallButton from '../../common/SmallButton';
-
 import { useParams } from 'react-router-dom';
-import { COLORS } from '../../../styles/colors';
-import axios from 'axios';
+
 import CommentItem from './CommentItem';
 import TextButton from '../../common/TextButton';
+import { createAuthComment } from '../../../core/comment';
 
 function ReplyList({ detailProduct }) {
-  const { id, nickname, content, createdAt, commentList } = detailProduct;
+  const { commentList } = detailProduct;
   const [comment, setComment] = useState('');
 
   const { productId } = useParams();
-  console.log('replylist', detailProduct);
 
   const onChangeHandler = (e) => {
     setComment(e.target.value);
-  };
-
-  const createComment = () => {
-    axios.post(
-      `http://3.35.218.111/api/products/${productId}/comments/${productId}`,
-      { comment: comment }
-    );
   };
 
   const onSubmit = (e) => {
@@ -32,10 +22,9 @@ function ReplyList({ detailProduct }) {
     if (comment === '') {
       alert('답글 내용을 입력해주세요.');
     }
-    try {
-      createComment();
-    } catch (error) {
-      throw error;
+    if (comment) {
+      // api 호출
+      createAuthComment(productId, comment);
     }
   };
 
