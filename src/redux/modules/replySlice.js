@@ -12,7 +12,7 @@ export const getReply = createAsyncThunk(
   async (payload, thunkAPI) => {
     console.log('넘어온 값', payload);
     try {
-      const response = await authInstance.get(`/commnetList/${payload}`);
+      const response = await authInstance.get(`/commentList/${payload}`);
       // console.log("get api확인:", response);
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {

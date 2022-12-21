@@ -5,32 +5,14 @@ import axios from 'axios';
 import SmallButton from '../../common/SmallButton';
 
 import { useNavigate, useParams } from 'react-router-dom';
-import { useState, useCallback } from 'react';
-import { useEffect } from 'react';
 
-export default function ProductDetail() {
-  const [product, setProduct] = useState({});
-  console.log(product);
+export default function ProductDetail({ detailProduct }) {
+  const { title, image, price, content } = detailProduct;
   const navigate = useNavigate();
   const { productId } = useParams();
-
   const onClickToUpdate = () => {
     navigate(`/update/${productId}`);
   };
-
-  const getProductsList = useCallback(async () => {
-    await axios
-      .get(`http://3.35.218.111/api/products/${productId}`)
-      .then((response) => {
-        // console.log(response.data);
-        setProduct(response.data);
-      })
-      .catch(function (error) {});
-  }, [productId]);
-
-  useEffect(() => {
-    getProductsList();
-  }, [getProductsList]);
 
   return (
     <>
@@ -39,11 +21,11 @@ export default function ProductDetail() {
       </StButtonWrap>
       <StDetilProductContainer>
         <StImgContainer>
-          <StImg src={product.image} />
+          <StImg src={image} />
         </StImgContainer>
-        <StSpan>{product.title}</StSpan>
-        <StSpan>{product.price}</StSpan>
-        <StContent>{product.content}</StContent>
+        <StSpan>{title}</StSpan>
+        <StSpan>{price}</StSpan>
+        <StContent>{content}</StContent>
       </StDetilProductContainer>
     </>
   );
