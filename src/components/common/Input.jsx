@@ -1,10 +1,9 @@
-import { toUnitless } from "@mui/material/styles/cssUtils";
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
 // import PropTypes from "prop-types";
 
 const StyledInput = styled.div`
-  width: ${(props) => props.width || "auto"};
+  width: ${(props) => props.width || 'auto'};
   margin: auto;
   position: relative;
   input {
@@ -38,7 +37,7 @@ function Input({ label, name, onChange, value, width, type }) {
   const [hasContent, setHasContent] = useState(false);
 
   const handleFloat = (event) => {
-    if (event.target.value !== "") {
+    if (event.target.value !== '') {
       setHasContent(true);
     } else {
       setHasContent(false);
@@ -46,7 +45,7 @@ function Input({ label, name, onChange, value, width, type }) {
   };
 
   useEffect(() => {
-    if (value !== "") {
+    if (value !== '') {
       setHasContent(true);
     } else {
       setHasContent(false);
@@ -58,13 +57,13 @@ function Input({ label, name, onChange, value, width, type }) {
       <input
         name={name}
         type={type}
-        placeholder=""
+        placeholder=''
         onBlur={handleFloat}
-        className={hasContent ? "has-content" : ""}
+        className={hasContent ? 'has-content' : ''}
         onChange={onChange}
         value={value}
       />
-      <label htmlFor={name} className="label">
+      <label htmlFor={name} className='label'>
         {label}
       </label>
     </StyledInput>
