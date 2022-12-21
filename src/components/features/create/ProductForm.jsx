@@ -5,6 +5,11 @@ import { COLORS, GRAY_COLORS } from '../../../styles/colors';
 import { useState, useCallback } from 'react';
 import axios from 'axios';
 import { useEffect } from 'react';
+import {
+  createProduct,
+  getDetailProduct,
+  updateProduct,
+} from '../../../core/product';
 
 // type은 create | update
 export default function ProductForm({ type = 'create', productData }) {
@@ -18,62 +23,42 @@ export default function ProductForm({ type = 'create', productData }) {
 
   const { productId } = useParams();
 
-  const getProductsList = useCallback(async () => {
-    const data = await axios
-      .get(`http://3.35.218.111/api/products/${productId}`)
-      .then((response) => {
-        setPrice(response.data.price);
-        setContent(response.data.content);
-        setImage(response.data.image);
-      })
-      .catch(function (error) {});
+  const getProductDetail = useCallback(async () => {
+    const { data } = await getDetailProduct(productId);
+    const { title, content, price } = data;
+    setTitle(title);
+    setPrice(price);
+    setContent(content);
+    console.log(data);
   }, [productId]);
 
+  //  TODO:  로그인 유저가 아닌 경우 막아 주어야 함
   useEffect(() => {
     if (type === 'update') {
-      getProductsList();
+      getProductDetail();
     }
-  }, [getProductsList, type]);
-
-  const updateProduct = async () => {
-    await axios.put(`http://3.35.218.111/api/products/${productId}`, {
-      id: productId,
-      title: title,
-      price: price,
-      nickname: 'ssori',
-      content: content,
-      image: image,
-    });
-  };
-
-  const createProduct = async () => {
-    await axios
-      .post(`http://3.35.218.111/api/products`, {
-        id: productId,
-        title: title,
-        price: price,
-        nickname: 'ssori',
-        content: content,
-        image: image,
-      })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
+  }, [getProductDetail, type]);
 
   const onSaveHandler = async (e) => {
     e.preventDefault();
     if (type === 'create') {
-      await createProduct();
+      const tempData = {
+        title: title,
+        price: price,
+        content: content,
+      };
+      await createProduct(tempData);
       alert('작성 완료!');
       navigate('/');
     }
 
     if (type === 'update') {
-      await updateProduct();
+      const tempData = {
+        title: title,
+        price: price,
+        content: content,
+      };
+      await updateProduct(productId, tempData);
       alert('수정 완료!');
       navigate('/');
     }
@@ -109,6 +94,7 @@ export default function ProductForm({ type = 'create', productData }) {
         placeholder='제목'
       />
       <StInput
+        type='number'
         value={price}
         name='price'
         onChange={onChangePrice}
