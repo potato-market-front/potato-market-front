@@ -3,16 +3,34 @@ import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "../../common/Button";
 import Input from "../../common/Input";
+<<<<<<< HEAD:src/components/features/login/login.jsx
 import { postLogin } from "../../../redux/modules/login";
 
 function Login() {
   const [loginId, setLoginId] = useState("");
+=======
+import { authInstance } from "../../../core/axios";
+// import { postLogin } from "../../../redux/modules/login";
+
+function Login() {
+  const postLogin = async () => {
+    try {
+      const data = await authInstance.get("/api/auth/login");
+      return console.log(data);
+    } catch (error) {
+      return console.log(error);
+    }
+  };
+
+  const [id, setId] = useState("");
+>>>>>>> dev:src/components/features/login/Login.jsx
   const [password, setPassword] = useState("");
 
   const navigation = useNavigate();
 
   const onLogin = () => {
     postLogin({
+<<<<<<< HEAD:src/components/features/login/login.jsx
       loginId,
       password,
     })
@@ -22,6 +40,13 @@ function Login() {
         // 이 코드를 거치면 로컬스토리지에 토큰값이 저장되어있다,.
         //localStorage.setItem, getItem 이미 있는 내장함수 (검색해보기)
         localStorage.setItem("id", res.headers.authorization); // 헤더에 id 토큰값을 실어왔다
+=======
+      id,
+      password,
+    })
+      .then((res) => {
+        localStorage.setItem("id", res.headers.authorization);
+>>>>>>> dev:src/components/features/login/Login.jsx
         navigation("/");
       })
       .catch((error) => console.log(error));
@@ -34,9 +59,14 @@ function Login() {
       <StInputGroup>
         <div>
           <Input
+<<<<<<< HEAD:src/components/features/login/login.jsx
             value={loginId}
             onChange={(event) => {
               setLoginId(event.target.value);
+=======
+            onChange={(event) => {
+              setId(event.target.value);
+>>>>>>> dev:src/components/features/login/Login.jsx
             }}
             type="text"
             name="id"
@@ -81,7 +111,6 @@ const StTopContainer = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 100px;
-
   gap: 50px;
 `;
 
@@ -89,7 +118,6 @@ const StInputGroup = styled.div`
   display: flex;
   flex-direction: column;
   margin: auto;
-
   gap: 30px;
 `;
 
@@ -98,7 +126,6 @@ const StButtonGroup = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
   margin: auto;
   gap: 20px;
 `;
