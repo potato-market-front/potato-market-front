@@ -2,12 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { authInstance } from "../../core/axios";
 
 const initialState = {
-  replyList: [
-    {
-      id: 1,
-      content: "대댓글 내용입니다.",
-    },
-  ],
+  replyList: [],
   // reply: {
   //   id: 1,
   //   content: "대댓글 내용입니다.",
@@ -18,10 +13,12 @@ const initialState = {
 export const getReply = createAsyncThunk(
   "reply/getreply",
   async (payload, thunkAPI) => {
-    console.log("넘어온 값", payload);
+    // console.log("넘어온 값", payload);
     try {
-      const response = await authInstance.get(`/replyList/${payload.detailId}`);
-      console.log("get api확인:", response);
+      const response = await authInstance.get(
+        `/replyList?productId=${payload.detailId}`
+      );
+      // console.log("get api확인:", response);
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       console.log("get api:", error);
@@ -46,7 +43,7 @@ export const postReply = createAsyncThunk(
     try {
       const response = await authInstance.post(`/replyList`, newReply);
       console.log("post api확인:", response);
-      return thunkAPI.fulfillWithValue(response.data);
+      return newReply;
     } catch (error) {
       console.log("post api:", error);
       return thunkAPI.rejectWithValue(error);
@@ -105,8 +102,9 @@ export const replySlice = createSlice({
     //   state.reply = action.payload;
     // },
     [postReply.fulfilled]: (state, action) => {
-      state.replyList.push(action.payload);
       console.log("post action.payload:", action.payload);
+      // state.replyList = { replyList: [...state.replyList, action.payload] };
+      state.replyList.push(action.payload);
     },
     [deleteReply.fulfilled]: (state, action) => {
       console.log("delete action.payload:", action.payload);

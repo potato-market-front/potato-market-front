@@ -31,7 +31,7 @@ export default function ProductList() {
   };
 
   useEffect(() => {
-    dispatch(getProduct);
+    dispatch(getProduct());
   }, [dispatch]);
 
   return (

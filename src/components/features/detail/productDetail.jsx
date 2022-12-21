@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import { getOneProduct } from "../../../redux/modules/productSlice";
 
 function ProductDetail() {
   const { productId } = useParams();
@@ -17,6 +18,11 @@ function ProductDetail() {
 
   const productDetail = productList.find((item) => item.id === productId);
   console.log("productDetail:", productDetail);
+
+  useEffect(() => {
+    dispatch(getOneProduct(productId));
+  }, [dispatch]);
+
   return (
     <div>
       <div>{productDetail.id}</div>

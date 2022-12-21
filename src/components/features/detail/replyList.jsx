@@ -13,12 +13,12 @@ import { useParams } from "react-router-dom";
 
 function ReplyList() {
   const { productId } = useParams();
-  console.log(productId);
+  // console.log(productId);
   const dispatch = useDispatch();
 
   // 전체 상태
   const select = useSelector((state) => state);
-  console.log("전체 state:", select);
+  // console.log("전체 state:", select);
 
   // // product 상태
   // const productList = select.products.products;
@@ -29,33 +29,33 @@ function ReplyList() {
 
   // 댓글의 상태
   const { error, replyList } = useSelector((state) => state.replyList);
-  console.log("replyList값:", replyList);
+  // console.log("replyList값:", replyList);
 
   // 수정 상태 지정
   const [display, setDisplay] = useState(false);
 
   // updateReply와 연결되는 부분
   // 댓글 배열
-  const replies = select.replyList.replyList;
-  console.log("댓글의 배열:", replies);
-  const reply = replies.find((item) => item.id === productId);
-  console.log("댓글 1개:", reply);
+  // const replies = select.replyList.replyList;
+  // console.log("댓글의 배열:", replies);
+  // const reply = replies.find((item) => item.id === productId);
+  // console.log("댓글 1개:", reply);
 
   // update할 때 복구
-  const [replyContent, setReplyContent] = useState(reply.content);
-  console.log("한개:", reply);
-  console.log("한개의 id:", reply.id);
-  console.log("한개의 content:", reply.replyContent);
+  // const [replyContent, setReplyContent] = useState(reply.content);
+  // console.log("한개:", reply);
+  // console.log("한개의 id:", reply.id);
+  // console.log("한개의 content:", reply.replyContent);
 
   // 1개의 id만 가져오기
-  const id = reply.id;
+  // const id = reply.id;
 
   // // 수정할 값을 불러오는 구간
-  console.log("수정할 값:", replyContent);
+  // console.log("수정할 값:", replyContent);
 
   // 수정 상태인지 확인하는 구간
   const [replyDisplay, setreplyDisplay] = useState(false);
-  console.log("replyDisplay 상태:", replyDisplay);
+  // console.log("replyDisplay 상태:", replyDisplay);
 
   useEffect(() => {
     dispatch(getReply({ detailId: productId }));
@@ -69,10 +69,10 @@ function ReplyList() {
   // }, [reply.content]);
 
   // update 할 떄 복구
-  useEffect(() => {
-    setReplyContent(reply.replyContent);
-    console.log("이펙트");
-  }, [reply]);
+  // useEffect(() => {
+  //   setReplyContent(reply.replyContent);
+  //   console.log("이펙트");
+  // }, [reply]);
 
   if (error) {
     return <div>{error.message}</div>;

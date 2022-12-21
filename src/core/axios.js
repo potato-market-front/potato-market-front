@@ -1,7 +1,12 @@
 import axios from "axios";
 
 export const authInstance = axios.create({
-  baseURL: "http://localhost:3001",
+  baseURL: "http://3.35.218.111",
+  // baseURL: "http://localhost:3001",
+  headers: {
+    Accept: "application/json",
+    "Content-Type": "application/json",
+  },
   // headers: {
   //   // "Access-Control-Allow-Origin": "*",
   // },

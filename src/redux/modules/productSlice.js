@@ -2,17 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { authInstance } from "../../core/axios";
 
 const initialState = {
-  products: [
-    {
-      id: "1",
-      title: "Ugg",
-      // image:
-      //   "https://dnvefa72aowie.cloudfront.net/origin/article/202212/F4C802A00FB1B732CD39B1DE901A8D0BD5929CD3D51B3756FE7243F5ABEE6791.jpg?q=82&s=300x300&t=crop",
-      price: 120000,
-      // createdAt: "2022-11-30T17:45:43.726338",
-      // modifiedAt: "2022-11-30T17:45:43.726338",
-    },
-  ],
+  products: [],
   error: null,
 };
 
@@ -20,7 +10,7 @@ export const getProduct = createAsyncThunk(
   "product/getProduct",
   async (payload, thunkAPI) => {
     try {
-      const response = await authInstance.get(`/products`);
+      const response = await authInstance.get(`/api/products`);
       console.log("product get:", response);
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
@@ -32,9 +22,12 @@ export const getProduct = createAsyncThunk(
 
 export const getOneProduct = createAsyncThunk(
   "product/getOneProduct",
-  async (detailId, thunkAPI) => {
+  async (productId, thunkAPI) => {
     try {
-      const response = await authInstance.get(`/detail/${detailId}`, detailId);
+      const response = await authInstance.get(
+        `/api/products/${productId}`,
+        productId
+      );
       console.log("product get one:", response);
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
@@ -48,7 +41,7 @@ export const updateProduct = createAsyncThunk(
   "product/updateProduct",
   async (productId, thunkAPI) => {
     try {
-      const response = authInstance.put(`/products/${productId}`);
+      const response = authInstance.put(`/api/products/${productId}`);
       console.log("product update:", response);
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
@@ -63,9 +56,8 @@ export const createProduct = createAsyncThunk(
   async (newProduct, thunkAPI) => {
     console.log("newProduct:", newProduct);
     try {
-      const response = authInstance.post(`/products`, newProduct);
-      console.log("product post:", response);
-      return thunkAPI.fulfillWithValue(response.data);
+      authInstance.post(`/api/products`, newProduct);
+      return newProduct;
     } catch (error) {
       console.log(error);
       return thunkAPI.rejectWithValue(error);
@@ -75,11 +67,11 @@ export const createProduct = createAsyncThunk(
 
 export const deleteProduct = createAsyncThunk(
   "product/deleteProduct",
-  async (itemId, thunkAPI) => {
-    console.log("product delete:", itemId);
+  async (productId, thunkAPI) => {
+    console.log("product delete:", productId);
     try {
-      await authInstance.delete(`/products/${itemId}`);
-      return itemId;
+      await authInstance.delete(`/api/products/${productId}`);
+      return productId;
     } catch (error) {
       console.log("product delete:", error);
       return thunkAPI.rejectWithValue(error);

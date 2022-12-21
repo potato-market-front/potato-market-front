@@ -3,29 +3,21 @@ import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "../../common/Button";
 import Input from "../../common/Input";
-import { authInstance } from "../../../core/axios";
-// import { postLogin } from "../../../redux/modules/login";
+import { postLogin } from "../../../redux/modules/login";
 
 function Login() {
-  const postLogin = async () => {
-    try {
-      const data = await authInstance.get("/api/auth/login");
-      return console.log(data);
-    } catch (error) {
-      return console.log(error);
-    }
-  };
-
-  const [id, setId] = useState("");
+  const [loginId, setLoginId] = useState("");
   const [password, setPassword] = useState("");
 
   const navigation = useNavigate();
 
   const onLogin = () => {
     postLogin({
-      id,
+      loginId,
       password,
-    })
+    });
+    console
+      .log("로그인시도:", loginId, password)
       .then((res) => {
         // 백으로 받은 리스폰스 (토큰 값))
         // 로컬스토리지에 저장했다 id라는 키값에
@@ -44,8 +36,9 @@ function Login() {
       <StInputGroup>
         <div>
           <Input
+            value={loginId}
             onChange={(event) => {
-              setId(event.target.value);
+              setLoginId(event.target.value);
             }}
             type="text"
             name="id"

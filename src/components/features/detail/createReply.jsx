@@ -3,9 +3,11 @@ import { useDispatch } from "react-redux";
 import { postReply } from "../../../redux/modules/replySlice";
 import TextButton from "../../common/TextButton";
 import Input from "../../common/Input";
+import { useParams } from "react-router-dom";
 
 function CreateReply() {
   const [replyInput, setReplyInput] = useState("");
+  const { productId } = useParams();
 
   const dispatch = useDispatch();
 
@@ -13,7 +15,7 @@ function CreateReply() {
     if (replyInput === "") {
       alert("답글 내용을 입력해주세요.");
     } else {
-      dispatch(postReply({ content: replyInput }));
+      dispatch(postReply({ productId, content: replyInput }));
       setReplyInput("");
     }
   };

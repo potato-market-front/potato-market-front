@@ -11,17 +11,17 @@ import {
 import TextButton from "../../common/TextButton";
 
 function SignUp() {
-  const [id, setId] = useState("");
+  const [loginId, setLoginId] = useState("");
   const [nickname, setNickname] = useState("");
   const [password, setPassword] = useState("");
 
   const navigation = useNavigate();
 
   const onSignUp = () => {
+    const jsonData = { loginId, nickname, password };
+    const result = JSON.stringify(jsonData);
     postSignup({
-      id,
-      nickname,
-      password,
+      result,
     }).then((res) => {
       localStorage.setItem("id", res.headers.authorization);
       // 어떤 변수명에 토큰 받을지 서로 얘기해야함 (res.headers...)
@@ -30,31 +30,37 @@ function SignUp() {
     });
   };
 
-  const idDup = (id) => {
-    idDupCheck(id).then((res) => {
-      // res로 받아왔다 idDupCheck로부터
-      console.log("ID 중복:", res);
-      if (res === false) {
+  const idDup = () => {
+    console.log("id값:", loginId);
+    const jsonData = { loginId: loginId };
+    const result = JSON.stringify(jsonData);
+    console.log("result", result);
+    idDupCheck(result).then((response) => {
+      console.log("data:", response.status);
+      // // res로 받아왔다 idDupCheck로부터
+      // console.log("data:", data.data.statusCode);
+      // // const id = JSON.parse(data);
+      if (response.status === 200) {
         alert("사용 가능한 ID입니다.");
-        setId(res);
-      } else {
+        setLoginId(loginId);
+      } else if (response.status === 400) {
         alert("이미 사용중인 ID입니다.");
-        setId(res);
-        id("");
+        setLoginId("");
       }
     });
   };
 
-  const nickDup = (nickname) => {
-    nickDupCheck(nickname).then((res) => {
-      console.log("Nick 중복:", res);
-      if (res === false) {
+  const nickDup = () => {
+    const dataJson = { nickname: nickname };
+    const result = JSON.stringify(dataJson);
+    nickDupCheck(result).then((data) => {
+      console.log("Nick 중복:", data);
+      if (data.data.statusCode === 200) {
         alert("사용 가능한 Nickname입니다.");
-        setNickname(res);
+        setNickname(nickname);
       } else {
         alert("이미 사용중인 Nickname입니다.");
-        setNickname(res);
-        nickname("");
+        setNickname("");
       }
     });
   };
@@ -65,8 +71,9 @@ function SignUp() {
       <StInputGroup>
         <StInputnButton>
           <Input
+            value={loginId}
             onChange={(event) => {
-              setId(event.target.value);
+              setLoginId(event.target.value);
             }}
             type="text"
             name="id"
@@ -77,6 +84,7 @@ function SignUp() {
         </StInputnButton>
         <StInputnButton>
           <Input
+            value={nickname}
             onChange={(event) => {
               setNickname(event.target.value);
             }}
