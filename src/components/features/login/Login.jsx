@@ -3,31 +3,26 @@ import styled from 'styled-components';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../common/Button';
 import Input from '../../common/Input';
-import { authInstance } from '../../../core/axios';
-// import { postLogin } from "../../../redux/modules/login";
+import { postLogin } from '../../../redux/modules/login';
 
 function Login() {
-  const postLogin = async () => {
-    try {
-      const data = await authInstance.get('/api/auth/login');
-      return console.log(data);
-    } catch (error) {
-      return console.log(error);
-    }
-  };
-
-  const [id, setId] = useState('');
+  const [loginId, setLoginId] = useState('');
   const [password, setPassword] = useState('');
+
   const navigation = useNavigate();
 
   const onLogin = () => {
     postLogin({
-      id,
+      loginId,
       password,
     })
       .then((res) => {
-        localStorage.setItem('id', res.headers.authorization);
-        navigation('/');
+        // 백으로 받은 리스폰스 (토큰 값))
+        // 로컬스토리지에 저장했다 id라는 키값에
+        // 이 코드를 거치면 로컬스토리지에 토큰값이 저장되어있다,.
+        //localStorage.setItem, getItem 이미 있는 내장함수 (검색해보기)
+        localStorage.setItem('id', res.headers.authorization); // 헤더에 id 토큰값을 실어왔다
+        navigation('/main');
       })
       .catch((error) => console.log(error));
   };
@@ -39,8 +34,9 @@ function Login() {
       <StInputGroup>
         <div>
           <Input
+            value={loginId}
             onChange={(event) => {
-              setId(event.target.value);
+              setLoginId(event.target.value);
             }}
             type='text'
             name='id'
@@ -85,6 +81,7 @@ const StTopContainer = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 100px;
+
   gap: 50px;
 `;
 
@@ -92,6 +89,7 @@ const StInputGroup = styled.div`
   display: flex;
   flex-direction: column;
   margin: auto;
+
   gap: 30px;
 `;
 
@@ -100,6 +98,7 @@ const StButtonGroup = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
   margin: auto;
   gap: 20px;
 `;

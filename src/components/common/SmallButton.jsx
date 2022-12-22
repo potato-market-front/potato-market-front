@@ -42,7 +42,6 @@ function SmallButton({ width, height, color, children, fontSize, onClick }) {
 }
 
 SmallButton.propTypes = {
-  color: PropTypes.node.isRequired,
   children: PropTypes.node.isRequired,
   // onClick: PropTypes.node.isRequired,
 };

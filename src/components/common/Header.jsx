@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { useState } from 'react';
 import { COLORS } from '../../styles/colors';
 import Logo from '../../assets/png/potato.png';
 import { Link } from 'react-router-dom';
@@ -15,14 +14,14 @@ export default function Header() {
 
   const onLoginOutHandler = () => {
     alert('로그아웃 되었습니다.');
-    navigate('/login');
+    navigate('/');
     localStorage.clear();
   };
 
   return (
     <StHeader>
       <StIconWrap>
-        <Link to='/'>
+        <Link to='/main'>
           <img alt='logo' src={Logo} width='40px' />
         </Link>
         <StLogo>감자마-켓</StLogo>

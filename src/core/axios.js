@@ -1,21 +1,21 @@
-import axios from "axios";
+import axios from 'axios';
 
 export const authInstance = axios.create({
-  baseURL: "http://3.35.218.111",
+  baseURL: 'http://3.35.218.111',
   // baseURL: "http://localhost:3001",
   headers: {
-    Accept: "application/json",
-    "Content-Type": "application/json",
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*',
   },
   // headers: {
-  //   // "Access-Control-Allow-Origin": "*",
   // },
 });
 
 authInstance.interceptors.request.use((config) => {
   if (config.headers === undefined) return;
-  const token = localStorage.getItem("id");
-  config.headers["Authorization"] = `${token}`;
+  const token = localStorage.getItem('id');
+  config.headers['Authorization'] = `${token}`;
   return config;
 });
 
@@ -30,3 +30,7 @@ authInstance.interceptors.request.use((config) => {
 // 리퀘스터 사용법이랑 토큰 헤더에 담아서 보내는법 검색해보기
 
 // 헤더엔 저장된 토큰값을 헤더에 실어서 보낸다.
+
+export const instance = axios.create({
+  baseURL: 'http://3.35.218.111',
+});
