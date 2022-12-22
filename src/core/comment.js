@@ -12,7 +12,7 @@ export const createAuthComment = async (productId, comment) => {
       `api/products/${productId}/comments/0`,
       // `api/products/${productId}/comments/${commentsId}`,
       {
-        comment: comment,
+        content: comment,
       }
     );
     return data;
@@ -24,7 +24,7 @@ export const createAuthComment = async (productId, comment) => {
 export const updateAuthComment = async (commentId, comment) => {
   try {
     await authInstance.put(`/api/products/comments/${commentId}`, {
-      comment: comment,
+      content: comment,
     });
   } catch (error) {
     throw error;

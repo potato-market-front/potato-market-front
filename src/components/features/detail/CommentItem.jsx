@@ -23,16 +23,24 @@ export default function CommentItem(props) {
     }
   };
 
-  const onEditSubmit = () => {
-    updateAuthComment(commentId, comment);
-    setCommentType('none');
+  const onEditSubmit = async () => {
+    try {
+      await updateAuthComment(commentId, comment);
+    } catch (error) {
+      alert('something wrong');
+    } finally {
+      window.location.reload();
+      setCommentType('none');
+    }
   };
 
   const onDeleteComment = async () => {
     try {
       await deleteAuthComment(commentId);
     } catch (error) {
-      navigation('/main');
+      alert('something wrong');
+    } finally {
+      window.location.reload();
     }
   };
 
