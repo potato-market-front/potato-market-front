@@ -28,6 +28,10 @@ function SignUp() {
   const navigation = useNavigate();
 
   const onSignUp = () => {
+    if (loginId === '' || nickname === '' || password === '') {
+      setPassMsg('모든 입력창을 채워주세요.');
+      return;
+    }
     postSignup({
       loginId,
       nickname,
@@ -36,7 +40,7 @@ function SignUp() {
       localStorage.setItem('id', res.headers.authorization);
       // 어떤 변수명에 토큰 받을지 서로 얘기해야함 (res.headers...)
       //
-      navigation('/main');
+      navigation('/');
     });
   };
 
