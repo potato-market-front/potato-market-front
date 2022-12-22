@@ -18,14 +18,20 @@ function ReplyList({ detailProduct }) {
     setComment(e.target.value);
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     if (comment === '') {
       alert('답글 내용을 입력해주세요.');
     }
     if (comment) {
       // api 호출
-      createAuthComment(productId, comment);
+      try {
+        await createAuthComment(productId, comment);
+      } catch (error) {
+        alert('something wrong...');
+      } finally {
+        window.location.reload();
+      }
     }
   };
 
