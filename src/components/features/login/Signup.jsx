@@ -1,24 +1,24 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import { Link, useNavigate } from "react-router-dom";
-import Input from "../../common/Input";
-import Button from "../../common/Button";
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { Link, useNavigate } from 'react-router-dom';
+import Input from '../../common/Input';
+import Button from '../../common/Button';
 import {
   idDupCheck,
   nickDupCheck,
   postSignup,
-} from "../../../redux/modules/login";
-import TextButton from "../../common/TextButton";
+} from '../../../redux/modules/login';
+import TextButton from '../../common/TextButton';
 
 function SignUp() {
-  const [loginId, setLoginId] = useState("");
-  const [nickname, setNickname] = useState("");
-  const [password, setPassword] = useState("");
+  const [loginId, setLoginId] = useState('');
+  const [nickname, setNickname] = useState('');
+  const [password, setPassword] = useState('');
 
   //TODO: 오류 메세지 출력
-  const [idMsg, setIdMsg] = useState("");
-  const [nameMsg, setNameMsg] = useState("");
-  const [passMsg, setPassMsg] = useState("");
+  const [idMsg, setIdMsg] = useState('');
+  const [nameMsg, setNameMsg] = useState('');
+  const [passMsg, setPassMsg] = useState('');
 
   // 유효성 검사
   const [isId, setIsId] = useState(false);
@@ -33,29 +33,24 @@ function SignUp() {
       nickname,
       password,
     }).then((res) => {
-      localStorage.setItem("id", res.headers.authorization);
+      localStorage.setItem('id', res.headers.authorization);
       // 어떤 변수명에 토큰 받을지 서로 얘기해야함 (res.headers...)
       //
-      navigation("/main");
+      navigation('/main');
     });
   };
 
   const idDup = () => {
-    console.log("id값:", loginId);
+    console.log('id값:', loginId);
     const jsonData = { loginId: loginId };
-    // const result = JSON.stringify(jsonData);
-    // console.log("result", result);
     idDupCheck(jsonData).then((response) => {
-      console.log("data:", response.status);
-      // // res로 받아왔다 idDupCheck로부터
-      // console.log("data:", data.data.statusCode);
-      // // const id = JSON.parse(data);
+      console.log('data:', response.status);
       if (response.status === 200) {
-        alert("사용 가능한 ID입니다.");
+        alert('사용 가능한 ID입니다.');
         setLoginId(loginId);
       } else if (response.status === 400) {
-        alert("이미 사용중인 ID입니다.");
-        setLoginId("");
+        alert('이미 사용중인 ID입니다.');
+        setLoginId('');
       }
     });
   };
@@ -64,13 +59,13 @@ function SignUp() {
     const dataJson = { nickname: nickname };
     const result = JSON.stringify(dataJson);
     nickDupCheck(result).then((data) => {
-      console.log("Nick 중복:", data);
+      console.log('Nick 중복:', data);
       if (data.data.statusCode === 200) {
-        alert("사용 가능한 Nickname입니다.");
+        alert('사용 가능한 Nickname입니다.');
         setNickname(nickname);
       } else {
-        alert("이미 사용중인 Nickname입니다.");
-        setNickname("");
+        alert('이미 사용중인 Nickname입니다.');
+        setNickname('');
       }
     });
   };
@@ -82,10 +77,10 @@ function SignUp() {
     const idRegExp = /^[a-z0-9]{4,10}$/;
 
     if (!idRegExp.test(currentId)) {
-      setIdMsg("4-10자 소문자와 숫자로 입력해주세요.");
+      setIdMsg('4-10자 소문자와 숫자로 입력해주세요.');
       setIsId(false);
     } else if (idRegExp.test(currentId)) {
-      setIdMsg("");
+      setIdMsg('');
       setIsId(true);
     }
   };
@@ -95,10 +90,10 @@ function SignUp() {
     setPassword(currentPassword);
     const passRegExp = /^[a-zA-Z0-9!@#$%^&*]{8,15}$/;
     if (!passRegExp.test(currentPassword)) {
-      setPassMsg("8-15자의 대소문자, 숫자, 특수문자(!@#$%^&*)로 입력해주세요.");
+      setPassMsg('8-15자의 대소문자, 숫자, 특수문자(!@#$%^&*)로 입력해주세요.');
       setIsPass(false);
     } else if (passRegExp.test(currentPassword)) {
-      setPassMsg("");
+      setPassMsg('');
       setIsPass(true);
     }
   };
@@ -111,18 +106,18 @@ function SignUp() {
           <Input
             value={loginId}
             onChange={onChangeId}
-            type="text"
-            name="id"
-            label="ID를 입력하세요."
-            width={"250px"}
+            type='text'
+            name='id'
+            label='ID를 입력하세요.'
+            width={'250px'}
           ></Input>
           <TextButton onClick={idDup}>중복확인</TextButton>
         </StInputnButton>
         <p
           style={{
-            fontSize: "11px",
-            color: "red",
-            marginLeft: "100px",
+            fontSize: '11px',
+            color: 'red',
+            marginLeft: '100px',
           }}
         >
           {idMsg}
@@ -133,17 +128,17 @@ function SignUp() {
             onChange={(event) => {
               setNickname(event.target.value);
             }}
-            type="text"
-            name="nick"
-            label="NickName을 입력하세요."
-            width={"250px"}
+            type='text'
+            name='nick'
+            label='NickName을 입력하세요.'
+            width={'250px'}
           ></Input>
           <TextButton onClick={nickDup}>중복확인</TextButton>
         </StInputnButton>
         <p
           style={{
-            fontSize: "11px",
-            color: "red",
+            fontSize: '11px',
+            color: 'red',
           }}
         >
           {nameMsg}
@@ -151,31 +146,31 @@ function SignUp() {
         <div>
           <Input
             onChange={onChangePassword}
-            type="password"
-            name="password"
-            label="비밀번호를 입력하세요."
-            width={"250px"}
+            type='password'
+            name='password'
+            label='비밀번호를 입력하세요.'
+            width={'250px'}
           ></Input>
         </div>
       </StInputGroup>
       <p
         style={{
-          fontSize: "11px",
-          color: "red",
+          fontSize: '11px',
+          color: 'red',
         }}
       >
         {passMsg}
       </p>
       <StButtonGroup>
         <div>
-          <Button width={"250px"} onClick={onSignUp}>
+          <Button width={'250px'} onClick={onSignUp}>
             Sign Up
           </Button>
         </div>
         <StLink>
-          <Link to="/login">
-            Already a member? Please{" "}
-            <span style={{ fontWeight: "bold" }}>Login.</span>
+          <Link to='/login'>
+            Already a member? Please{' '}
+            <span style={{ fontWeight: 'bold' }}>Login.</span>
           </Link>
         </StLink>
       </StButtonGroup>

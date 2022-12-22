@@ -17,11 +17,7 @@ function Login() {
       password,
     })
       .then((res) => {
-        // 백으로 받은 리스폰스 (토큰 값))
-        // 로컬스토리지에 저장했다 id라는 키값에
-        // 이 코드를 거치면 로컬스토리지에 토큰값이 저장되어있다,.
-        //localStorage.setItem, getItem 이미 있는 내장함수 (검색해보기)
-        localStorage.setItem('id', res.headers.authorization); // 헤더에 id 토큰값을 실어왔다
+        localStorage.setItem('id', res.headers.authorization);
         navigation('/main');
       })
       .catch((error) => console.log(error));
