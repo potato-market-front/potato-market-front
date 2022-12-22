@@ -11,11 +11,12 @@ import {
 import TextButton from "../../common/TextButton";
 
 function SignUp() {
+  // 인풋 값 가져오기
   const [loginId, setLoginId] = useState("");
   const [nickname, setNickname] = useState("");
   const [password, setPassword] = useState("");
 
-  //TODO: 오류 메세지 출력
+  // 오류 메세지 출력
   const [idMsg, setIdMsg] = useState("");
   const [nameMsg, setNameMsg] = useState("");
   const [passMsg, setPassMsg] = useState("");
@@ -23,21 +24,24 @@ function SignUp() {
   // 유효성 검사
   const [isId, setIsId] = useState(false);
   const [isPass, setIsPass] = useState(false);
-  // TODO:
 
   const navigation = useNavigate();
 
   const onSignUp = () => {
-    postSignup({
-      loginId,
-      nickname,
-      password,
-    }).then((res) => {
-      localStorage.setItem("id", res.headers.authorization);
-      // 어떤 변수명에 토큰 받을지 서로 얘기해야함 (res.headers...)
-      //
-      navigation("/main");
-    });
+    if (loginId === "" || nickname === "" || password === "") {
+      setPassMsg("모든 입력창을 채워주세요.");
+    } else {
+      postSignup({
+        loginId,
+        nickname,
+        password,
+      }).then((res) => {
+        localStorage.setItem("id", res.headers.authorization);
+        // 어떤 변수명에 토큰 받을지 서로 얘기해야함 (res.headers...)
+        //
+        navigation("/login");
+      });
+    }
   };
 
   const idDup = () => {
@@ -46,15 +50,15 @@ function SignUp() {
     // const result = JSON.stringify(jsonData);
     // console.log("result", result);
     idDupCheck(jsonData).then((response) => {
-      console.log("data:", response.status);
+      console.log("data:", response);
       // // res로 받아왔다 idDupCheck로부터
       // console.log("data:", data.data.statusCode);
       // // const id = JSON.parse(data);
-      if (response.status === 200) {
-        alert("사용 가능한 ID입니다.");
+      if (response.data.statusCode === 200) {
+        setIdMsg("사용 가능한 ID입니다.");
         setLoginId(loginId);
-      } else if (response.status === 400) {
-        alert("이미 사용중인 ID입니다.");
+      } else {
+        setIdMsg("이미 사용중인 ID입니다.");
         setLoginId("");
       }
     });
@@ -66,16 +70,15 @@ function SignUp() {
     nickDupCheck(result).then((data) => {
       console.log("Nick 중복:", data);
       if (data.data.statusCode === 200) {
-        alert("사용 가능한 Nickname입니다.");
+        setNameMsg("사용 가능한 Nickname입니다.");
         setNickname(nickname);
       } else {
-        alert("이미 사용중인 Nickname입니다.");
+        setNameMsg("이미 사용중인 Nickname입니다.");
         setNickname("");
       }
     });
   };
 
-  // TODO: INPUT change 핸들러
   const onChangeId = (e) => {
     const currentId = e.target.value;
     setLoginId(currentId);
@@ -89,7 +92,7 @@ function SignUp() {
       setIsId(true);
     }
   };
-  // TODO: 패스워드 change 핸들러
+
   const onChangePassword = (e) => {
     const currentPassword = e.target.value;
     setPassword(currentPassword);
