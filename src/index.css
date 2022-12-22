@@ -1,0 +1,18 @@
+body {
+  margin: 0;
+  font-family: Diary;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+@font-face {
+  font-family: "Diary";
+  src: url("../src/assets/font/EF_Diary.woff");
+  font-weight: 100;
+  font-style: normal;
+}
