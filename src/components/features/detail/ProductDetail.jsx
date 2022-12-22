@@ -16,7 +16,7 @@ export default function ProductDetail({ detailProduct }) {
   };
   const onClickDelete = async () => {
     await deleteProduct(productId);
-    navigate(`/`);
+    navigate(`/main`);
   };
 
   return (

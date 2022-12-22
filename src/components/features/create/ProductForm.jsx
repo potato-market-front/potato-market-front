@@ -64,7 +64,7 @@ export default function ProductForm({ type = 'create', productData }) {
       };
       await updateProduct(productId, tempData);
       alert('수정 완료!');
-      navigate('/main');
+      navigate(`/detail/${productId}`);
     }
   };
 

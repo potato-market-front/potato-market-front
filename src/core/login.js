@@ -50,6 +50,6 @@ export const nickDupCheck = async (nickname) => {
     return data;
   } catch (error) {
     return console.log(error);
-    // 중복 체크일 경우, 프론트에서 400에러를 받고 에러 핸들링이 필요하다.
+    // 중복 체크일 경우, 프론트에서 400에러를 받고 에러 핸들링 필요
   }
 };

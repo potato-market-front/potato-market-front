@@ -3,6 +3,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 
 import { deleteAuthComment, updateAuthComment } from '../../../core/comment';
+import { useNavigate } from 'react-router-dom';
 
 export default function CommentItem(props) {
   const { commentId, content, createdAt, nickName } = props;
@@ -10,6 +11,7 @@ export default function CommentItem(props) {
   const [commentType, setCommentType] = useState('none');
   const [comment, setComment] = useState('');
 
+  const navigation = useNavigate();
   // onClick 함수
 
   const onEditComment = () => {
@@ -26,8 +28,12 @@ export default function CommentItem(props) {
     setCommentType('none');
   };
 
-  const onDeleteComment = () => {
-    deleteAuthComment(commentId);
+  const onDeleteComment = async () => {
+    try {
+      await deleteAuthComment(commentId);
+    } catch (error) {
+      navigation('/main');
+    }
   };
 
   // onChange 함수
