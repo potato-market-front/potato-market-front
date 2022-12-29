@@ -1,7 +1,6 @@
 import { instance, authInstance } from './axios';
 
-// 리스트불러오기
-// 완료
+// 리스트불러오기(ProductList)
 export const getProduct = async () => {
   try {
     const data = await instance.get(`/api/products`);
@@ -11,8 +10,7 @@ export const getProduct = async () => {
   }
 };
 
-// 프로덕트 생성
-// 완료
+// 프로덕트 생성(ProductForm)
 export const createProduct = async (data) => {
   try {
     await authInstance.post(`/api/products`, data);
@@ -21,8 +19,16 @@ export const createProduct = async (data) => {
   }
 };
 
-// product 상세조회
-//
+// product 수정하기(ProductForm)
+export const updateProduct = async (productId, data) => {
+  try {
+    await authInstance.put(`/api/products/${productId}`, data);
+  } catch (error) {
+    throw error;
+  }
+};
+
+// product 상세조회(Detail)
 export const getDetailProduct = async (productId) => {
   try {
     const data = await instance.get(`/api/products/${productId}`);
@@ -32,16 +38,7 @@ export const getDetailProduct = async (productId) => {
   }
 };
 
-// product 수정하기
-export const updateProduct = async (productId, data) => {
-  try {
-    await authInstance.put(`/api/products/${productId}`, data);
-  } catch (error) {
-    throw error;
-  }
-};
-
-// product 삭제하기
+// product 삭제하기(ProductDeatail)
 export const deleteProduct = async (productId) => {
   try {
     const data = await authInstance.delete(`/api/products/${productId}`);

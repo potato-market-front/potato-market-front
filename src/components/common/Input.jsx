@@ -33,7 +33,7 @@ const StyledInput = styled.div`
   }
 `;
 
-function Input({ label, name, onChange, value, width, type }) {
+function Input({ label, name, value, width, type }) {
   const [hasContent, setHasContent] = useState(false);
 
   const handleFloat = (event) => {
@@ -70,11 +70,5 @@ function Input({ label, name, onChange, value, width, type }) {
   );
 }
 
-// Input.propTypes = {
-//   label: PropTypes.node.isRequired,
-//   name: PropTypes.node.isRequired,
-//   // onChange: PropTypes.node.isRequired,
-//   // value: PropTypes.node.isRequired,
-// };
 
 export default Input;

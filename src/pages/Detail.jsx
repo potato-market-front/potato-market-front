@@ -3,7 +3,6 @@ import Layout from '../components/common/Layout';
 import Header from '../components/common/Header';
 import ProductDetail from '../components/features/detail/ProductDetail';
 import ReplyList from '../components/features/detail/ReplyList';
-import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { getDetailProduct } from '../core/product';
